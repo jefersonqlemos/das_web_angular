@@ -2,6 +2,40 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
+## Clone this repository
+
+Traz o repositório para amáquina
+
+```bash
+git clone https://github.com/jefersonqlemos/das_web_angular.git
+```
+
+Após cria/modificar ds arquivo necessários
+
+Adicione os arquivos ao pacote local
+
+```bash
+git add .
+```
+
+Criar o pacote com uma mensagem
+
+```bash
+git commit -m "<sua mensagem>"
+```
+
+Suba as alterações para o github
+
+```bash
+git push
+```
+
+Caso seja a primeira vez diga o nome do branch no servidor com esse comando
+
+```bash
+git push --set-upstream origin branch-de-teste
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
