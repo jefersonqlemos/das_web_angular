@@ -28,6 +28,12 @@ Create the package with a message
 ```bash
 git commit -m "<sua mensagem>"
 ```
+If do not set up your email and name, git will ask
+
+```bash
+git config --global user.email "<youremail@exemple.com>"
+>>   git config --global user.name "<yourfullname>"
+```
 
 Push the changes to github
 
