@@ -4,39 +4,44 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Clone this repository
 
-Traz o repositório para amáquina
+Downlaod repository to own machine
 
 ```bash
 git clone https://github.com/jefersonqlemos/das_web_angular.git
 ```
 
-Cria um branch na sua máquina
+Create a local branch
 
 ```bash
 git checkout -b "outro-branch"
 ```
 
-Após cria/modificar ds arquivo necessários
+After create/modify the local files add them to local package
 
-Adicione os arquivos ao pacote local
 
 ```bash
 git add .
 ```
 
-Criar o pacote com uma mensagem
+Create the package with a message
 
 ```bash
 git commit -m "<sua mensagem>"
 ```
+If do not set up your email and name, git will ask
 
-Suba as alterações para o github
+```bash
+git config --global user.email "<youremail@exemple.com>"
+>>   git config --global user.name "<yourfullname>"
+```
+
+Push the changes to github
 
 ```bash
 git push
 ```
 
-Caso seja a primeira vez diga o nome do branch no servidor com esse comando
+In case is the first push you have to enter the branch name on the server with the following comand
 
 ```bash
 git push --set-upstream origin branch-de-teste
