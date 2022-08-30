@@ -10,6 +10,12 @@ Traz o repositório para amáquina
 git clone https://github.com/jefersonqlemos/das_web_angular.git
 ```
 
+Cria um branch na sua máquina
+
+```bash
+git checkout -b "outro-branch"
+```
+
 Após cria/modificar ds arquivo necessários
 
 Adicione os arquivos ao pacote local
