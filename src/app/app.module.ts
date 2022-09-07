@@ -11,17 +11,21 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ListarProdutosComponent, DialogCadastrarProduto, DialogEditarProduto } from './produtos/listar-produtos/listar-produtos.component';
+import { ListarProdutosComponent } from './produtos/listar-produtos/listar-produtos.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { LocalStorageService } from './services/local-storage.service';
+import { DialogCadastrarProdutoComponent } from './produtos/dialog-cadastrar-produto/dialog-cadastrar-produto.component';
+import { DialogEditarProdutoComponent } from './produtos/dialog-editar-produto/dialog-editar-produto.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ListarProdutosComponent,
-    DialogCadastrarProduto,
-    DialogEditarProduto
+    DialogCadastrarProdutoComponent,
+    DialogEditarProdutoComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,7 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
