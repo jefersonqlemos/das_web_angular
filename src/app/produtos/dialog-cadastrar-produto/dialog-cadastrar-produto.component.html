@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Cadastrar Produto</h1>
-<form #produto="ngForm" (ngSubmit)="armazenarProduto(produto.value)">
+<form #formProduto="ngForm" (ngSubmit)="armazenarProduto(formProduto.value)">
   <div mat-dialog-content>
       <mat-form-field appearance="fill" [style.width.%]=100>
         <mat-label>ID</mat-label>
@@ -17,7 +17,7 @@
       </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button type="submit" mat-raised-button (click)="onNoClick()">Cancelar</button>
+    <button mat-raised-button (click)="onNoClick()">Cancelar</button>
     <button mat-raised-button cdkFocusInitial color="primary">Concluir</button>
   </div>
 </form>

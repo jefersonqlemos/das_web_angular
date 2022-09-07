@@ -1,12 +1,7 @@
 import { Component, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-
-export interface Produtos {
-  id: number;
-  nome: string;
-  valor: number;
-}
+import { Produtos } from '../listar-produtos/listar-produtos.component';
 
 @Component({
   selector: 'app-dialog-cadastrar-produto',
@@ -27,12 +22,17 @@ export class DialogCadastrarProdutoComponent {
 
   armazenarProduto(produto: Produtos): void {
     
-    //ListaProduto: Produtos[] = [ produto ];
+    let produtos: Produtos[] = [];
 
-    //const arr4 = [...this.localStorageService.getItem('produto'), ...produto];
+    if(this.localStorageService.getItem('produto')){
+      produtos = this.localStorageService.getItem('produto');
+    }
 
-    this.localStorageService.setItem('produto', produto);
+    produtos.push(produto);
+
+    this.localStorageService.setItem('produto', produtos);
     this.dialogRef.close();
+    window.location.reload();
   }
 
 }

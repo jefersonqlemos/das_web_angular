@@ -1,12 +1,7 @@
 import { Component, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-
-export interface Produtos {
-  id: number;
-  nome: string;
-  valor: number;
-}
+import { Produtos } from '../listar-produtos/listar-produtos.component';
 
 @Component({
   selector: 'app-dialog-editar-produto',
@@ -22,6 +17,10 @@ export class DialogEditarProdutoComponent {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  atualizarProduto(produto: Produtos): void {
+
   }
 
 }

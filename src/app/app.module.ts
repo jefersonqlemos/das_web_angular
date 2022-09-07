@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { LocalStorageService } from './services/local-storage.service';
 import { DialogCadastrarProdutoComponent } from './produtos/dialog-cadastrar-produto/dialog-cadastrar-produto.component';
 import { DialogEditarProdutoComponent } from './produtos/dialog-editar-produto/dialog-editar-produto.component';
+import { DialogExcluirProdutoComponent } from './produtos/dialog-excluir-produto/dialog-excluir-produto.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { DialogEditarProdutoComponent } from './produtos/dialog-editar-produto/d
     AppComponent,
     ListarProdutosComponent,
     DialogCadastrarProdutoComponent,
-    DialogEditarProdutoComponent
+    DialogEditarProdutoComponent,
+    DialogExcluirProdutoComponent
   ],
   imports: [
     BrowserModule,
