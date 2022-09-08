@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Produtos } from '../listar-produtos/listar-produtos.component';
+import { IProductModel } from 'src/app/services/interfaces/IProduct';
+import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
 
 @Component({
   selector: 'app-dialog-excluir-produto',
@@ -12,24 +12,17 @@ export class DialogExcluirProdutoComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogExcluirProdutoComponent>,
-    @Inject(MAT_DIALOG_DATA) public produto: Produtos,
-    public localStorageService: LocalStorageService
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public produto: IProductModel,
+    public repositoryService: ProductRepositoryService
+  ) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  excluirProduto(produto: Produtos): void {
-    
-    let produtos: Produtos[] = [];
-    
-    produtos = this.localStorageService.getItem('produto');
-    produtos = produtos.filter(item => item.id !== produto.id);
-
-    console.log(produtos);
-
-    this.localStorageService.setItem('produto', produtos);
+  excluirProduto(produto: IProductModel): void {
+    this.repositoryService.remove(produto.id);
     this.dialogRef.close();
     window.location.reload();
   }
