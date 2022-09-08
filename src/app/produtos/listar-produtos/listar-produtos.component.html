@@ -37,7 +37,7 @@
                 <!-- Weight Column -->
                 <ng-container matColumnDef="valor">
                 <th mat-header-cell *matHeaderCellDef> Valor </th>
-                <td mat-cell *matCellDef="let produto">R$ {{produto.valor}} </td>
+                <td mat-cell *matCellDef="let produto">R$ {{produto.valor | number :'1.2-2'}} </td>
                 </ng-container>
 
                  <!-- Editar Column -->
