@@ -38,7 +38,12 @@ export class GenericRepository {
     if (item == undefined)
       return false;
 
-    item = value;
+    // update all item properties
+    for (const key in item) {
+      if (Object.prototype.hasOwnProperty.call(item, key)) {
+        item[key] = value[key];
+      }
+    }
 
     this.save();
 
@@ -53,7 +58,6 @@ export class GenericRepository {
       id = lastItem[this.itemKey];
     }
 
-    debugger;
     // increment the id and use it
     value[this.itemKey] = ++id;
   }

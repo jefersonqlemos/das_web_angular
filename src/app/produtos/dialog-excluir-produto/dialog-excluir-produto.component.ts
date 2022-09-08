@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IProductModel } from 'src/app/services/interfaces/IProduct';
 import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
-import { Produtos } from '../listar-produtos/listar-produtos.component';
 
 @Component({
   selector: 'app-dialog-excluir-produto',
@@ -12,7 +12,7 @@ export class DialogExcluirProdutoComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogExcluirProdutoComponent>,
-    @Inject(MAT_DIALOG_DATA) public produto: Produtos,
+    @Inject(MAT_DIALOG_DATA) public produto: IProductModel,
     public repositoryService: ProductRepositoryService
   ) {
   }
@@ -21,8 +21,8 @@ export class DialogExcluirProdutoComponent {
     this.dialogRef.close();
   }
 
-  excluirProduto(produto: Produtos): void {
-    this.repositoryService.remove(produto);
+  excluirProduto(produto: IProductModel): void {
+    this.repositoryService.remove(produto.id);
     this.dialogRef.close();
     window.location.reload();
   }

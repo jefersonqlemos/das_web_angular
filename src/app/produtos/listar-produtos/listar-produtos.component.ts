@@ -1,68 +1,52 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { IProductModel } from 'src/app/services/interfaces/IProduct';
 import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
 import { DialogCadastrarProdutoComponent } from '../dialog-cadastrar-produto/dialog-cadastrar-produto.component';
 import { DialogEditarProdutoComponent } from '../dialog-editar-produto/dialog-editar-produto.component';
 import { DialogExcluirProdutoComponent } from '../dialog-excluir-produto/dialog-excluir-produto.component';
 
-export interface Produtos {
-  id: number;
-  nome: string;
-  valor: number;
-}
-
 @Component({
   selector: 'app-listar-produtos',
   templateUrl: './listar-produtos.component.html',
-  styleUrls: ['./listar-produtos.component.css']
+  styleUrls: ['./listar-produtos.component.css'],
 })
 export class ListarProdutosComponent implements OnInit {
-
-  displayedColumns: string[] = ['id', 'nome', 'valor', 'editar', 'excluir'];
+  displayedColumns: string[] = ['id', 'name', 'value', 'editar', 'excluir'];
 
   constructor(
     public dialog: MatDialog,
-    public repositoryService: ProductRepositoryService) { }
-  
-  LISTA_PRODUTOS: Produtos[] = this.repositoryService.getAll();
-  
-  produtos = this.LISTA_PRODUTOS; 
+    public repositoryService: ProductRepositoryService
+  ) {}
+
+  LISTA_PRODUTOS: IProductModel[] = this.repositoryService.getAll();
+
+  produtos = this.LISTA_PRODUTOS;
+
+  private DIALOG_WIDTH = "50%"
+
+  openDialog(type: any, data?: IProductModel): void {
+    const dialogRef = this.dialog.open(type, {
+      width: this.DIALOG_WIDTH,
+      data: data,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
 
   cadastrarProduto(): void {
-    
-    console.log(this.repositoryService.getAll());
-
-    const dialogRef = this.dialog.open(DialogCadastrarProdutoComponent, {
-      width: '50%'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    this.openDialog(DialogCadastrarProdutoComponent);
   }
 
-  editarProduto(produto: Produtos): void {
-    const dialogRef = this.dialog.open(DialogEditarProdutoComponent, {
-      width: '50%',
-      data: {id: produto.id, nome: produto.nome, valor: produto.valor},
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  editarProduto(produto: IProductModel): void {
+    this.openDialog(DialogEditarProdutoComponent, produto);
   }
 
-  excluirProduto(produto: Produtos): void {
-    const dialogRef = this.dialog.open(DialogExcluirProdutoComponent, {
-      width: '50%',
-      data: {id: produto.id},
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  excluirProduto(produto: IProductModel): void {
+    this.openDialog(DialogExcluirProdutoComponent, produto);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
