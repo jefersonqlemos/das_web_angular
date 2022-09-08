@@ -9,11 +9,25 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
-import { MatMenuModule } from '@angular/material/menu'
+import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ListarProdutosComponent } from './produtos/listar-produtos/listar-produtos.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { LocalStorageService } from './services/local-storage.service';
+import { DialogCadastrarProdutoComponent } from './produtos/dialog-cadastrar-produto/dialog-cadastrar-produto.component';
+import { DialogEditarProdutoComponent } from './produtos/dialog-editar-produto/dialog-editar-produto.component';
+import { DialogExcluirProdutoComponent } from './produtos/dialog-excluir-produto/dialog-excluir-produto.component';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListarProdutosComponent,
+    DialogCadastrarProdutoComponent,
+    DialogEditarProdutoComponent,
+    DialogExcluirProdutoComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +38,14 @@ import { MatMenuModule } from '@angular/material/menu'
     MatButtonModule,
     MatListModule,
     MatTableModule,
-    MatMenuModule
+    MatMenuModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule,
+    CurrencyMaskModule
   ],
-  providers: [],
+  providers: [LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

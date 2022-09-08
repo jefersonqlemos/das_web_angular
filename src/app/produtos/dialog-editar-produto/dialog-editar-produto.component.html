@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Editar Produto</h1>
+<form #formProduto="ngForm" (ngSubmit)="atualizarProduto(formProduto.value)">
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" [style.width.%]=100>
+      <mat-label>ID</mat-label>
+      <input matInput type="number" name="id" [(ngModel)]="produto.id" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" [style.width.%]=100>
+      <mat-label>Nome</mat-label>
+      <input matInput name="nome" [(ngModel)]="produto.nome" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" [style.width.%]=100>
+      <mat-label>Valor</mat-label>
+      <input [options]="{ prefix: 'R$ ', align: 'left'}" matInput currencyMask name="valor" [(ngModel)]="produto.valor" required>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button type="button" mat-raised-button (click)="onNoClick()">Cancelar</button>
+    <button type="submit" mat-raised-button cdkFocusInitial color="primary" >Concluir</button>
+  </div>
+</form>

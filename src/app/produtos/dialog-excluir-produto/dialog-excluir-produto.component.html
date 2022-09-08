@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Excluir Produto</h1>
+<div mat-dialog-content>
+      <p>Essa ação excluira o produto, deseja continuar?</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Não</button>
+    <button mat-raised-button cdkFocusInitial (click)="excluirProduto(produto)" color="primary">Sim</button>
+</div>
+
