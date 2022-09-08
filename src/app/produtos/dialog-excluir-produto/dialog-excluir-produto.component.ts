@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
 import { Produtos } from '../listar-produtos/listar-produtos.component';
 
@@ -15,7 +14,8 @@ export class DialogExcluirProdutoComponent {
     public dialogRef: MatDialogRef<DialogExcluirProdutoComponent>,
     @Inject(MAT_DIALOG_DATA) public produto: Produtos,
     public repositoryService: ProductRepositoryService
-  ) {}
+  ) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

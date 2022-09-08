@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
 import { DialogCadastrarProdutoComponent } from '../dialog-cadastrar-produto/dialog-cadastrar-produto.component';
 import { DialogEditarProdutoComponent } from '../dialog-editar-produto/dialog-editar-produto.component';
 import { DialogExcluirProdutoComponent } from '../dialog-excluir-produto/dialog-excluir-produto.component';
@@ -20,15 +20,17 @@ export class ListarProdutosComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'nome', 'valor', 'editar', 'excluir'];
 
-  constructor(public dialog: MatDialog, public localStorageService: LocalStorageService) { }
+  constructor(
+    public dialog: MatDialog,
+    public repositoryService: ProductRepositoryService) { }
   
-  LISTA_PRODUTOS: Produtos[] = this.localStorageService.getItem('produto');
+  LISTA_PRODUTOS: Produtos[] = this.repositoryService.getItem('produto');
   
   produtos = this.LISTA_PRODUTOS; 
 
   cadastrarProduto(): void {
     
-    console.log(this.localStorageService.getItem('produto'));
+    console.log(this.repositoryService.getItem('produto'));
 
     const dialogRef = this.dialog.open(DialogCadastrarProdutoComponent, {
       width: '50%'

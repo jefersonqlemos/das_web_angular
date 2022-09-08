@@ -15,11 +15,11 @@ import { ListarProdutosComponent } from './produtos/listar-produtos/listar-produ
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { LocalStorageService } from './services/local-storage.service';
 import { DialogCadastrarProdutoComponent } from './produtos/dialog-cadastrar-produto/dialog-cadastrar-produto.component';
 import { DialogEditarProdutoComponent } from './produtos/dialog-editar-produto/dialog-editar-produto.component';
 import { DialogExcluirProdutoComponent } from './produtos/dialog-excluir-produto/dialog-excluir-produto.component';
 import { CurrencyMaskModule } from "ng2-currency-mask";
+import { ProductRepositoryService } from './services/repositories/products/product-repository.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,9 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
     FormsModule,
     CurrencyMaskModule
   ],
-  providers: [LocalStorageService],
+  providers: [
+    ProductRepositoryService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
