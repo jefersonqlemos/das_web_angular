@@ -15,18 +15,30 @@ export class GenericRepository {
   }
 
   protected configure(repositoryName: string, itemKey: string) {
-    this.storage = window.localStorage;
-    this.list = [];
+    this.storageKey = repositoryName;
+    this.itemKey = itemKey;
+
+    const storageValue = this.storage.getItem(this.storageKey);
+    if (storageValue != undefined) {
+      this.list = JSON.parse(storageValue);
+    }
   }
 
-  setItem(value: any) {
+  add(value: any) {
+    this.incrementKey(value);
+
+    this.list.push(value);
+
+    this.save();
+  }
+
+  update(value: any) {
     var item = this.getItem(value[this.itemKey]);
 
-    if (item != undefined) {
-      this.incrementKey(value);
+    if (item == undefined)
+      return false;
 
-      this.list.push(value);
-    }
+    item = value;
 
     this.save();
 
@@ -41,12 +53,16 @@ export class GenericRepository {
       id = lastItem[this.itemKey];
     }
 
+    debugger;
     // increment the id and use it
     value[this.itemKey] = ++id;
   }
 
   getItem(key: any): any {
     return this.list.find((i) => i[this.itemKey] == key);
+  }
+  getAll() {
+    return this.list;
   }
 
   remove(key: any): boolean {

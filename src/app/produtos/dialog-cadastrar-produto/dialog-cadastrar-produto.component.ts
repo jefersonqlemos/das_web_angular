@@ -21,7 +21,8 @@ export class DialogCadastrarProdutoComponent {
   }
 
   armazenarProduto(produto: Produtos): void {
-    this.repositoryService.setItem(produto);
+    produto.id = 0;
+    this.repositoryService.add(produto);
 
     this.dialogRef.close();
 

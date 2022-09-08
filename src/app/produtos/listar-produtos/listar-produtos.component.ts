@@ -24,13 +24,13 @@ export class ListarProdutosComponent implements OnInit {
     public dialog: MatDialog,
     public repositoryService: ProductRepositoryService) { }
   
-  LISTA_PRODUTOS: Produtos[] = this.repositoryService.getItem('produto');
+  LISTA_PRODUTOS: Produtos[] = this.repositoryService.getAll();
   
   produtos = this.LISTA_PRODUTOS; 
 
   cadastrarProduto(): void {
     
-    console.log(this.repositoryService.getItem('produto'));
+    console.log(this.repositoryService.getAll());
 
     const dialogRef = this.dialog.open(DialogCadastrarProdutoComponent, {
       width: '50%'

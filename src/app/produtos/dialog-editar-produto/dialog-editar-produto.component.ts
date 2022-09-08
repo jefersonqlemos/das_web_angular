@@ -20,7 +20,7 @@ export class DialogEditarProdutoComponent {
   }
 
   atualizarProduto(produto: Produtos): void {
-    this.repositoryService.setItem(produto);
+    this.repositoryService.update(produto);
     this.dialogRef.close();
     window.location.reload();
   }
