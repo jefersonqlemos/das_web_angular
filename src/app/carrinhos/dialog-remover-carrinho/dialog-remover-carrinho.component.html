@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Remover Carrinho</h1>
+<div mat-dialog-content>
+      <p>Essa ação removera o carrinho da lista, deseja continuar?</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Não</button>
+    <button mat-raised-button cdkFocusInitial (click)="removerCarrinho(carrinho)" color="primary">Sim</button>
+</div>

@@ -1,0 +1,11 @@
+table {
+    width: 100%;
+}
+
+td {
+    width: 33.00%;
+}
+
+.title{
+    padding-top: 3px;
+}

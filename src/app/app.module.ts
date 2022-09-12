@@ -20,6 +20,13 @@ import { DialogEditarProdutoComponent } from './produtos/dialog-editar-produto/d
 import { DialogExcluirProdutoComponent } from './produtos/dialog-excluir-produto/dialog-excluir-produto.component';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { ProductRepositoryService } from './services/repositories/products/product-repository.service';
+import { ListarCarrinhosComponent } from './carrinhos/listar-carrinhos/listar-carrinhos.component';
+import { CriarCarrinhoComponent } from './carrinhos/criar-carrinho/criar-carrinho.component';
+import { DialogBuscarProdutoComponent } from './carrinhos/dialog-buscar-produto/dialog-buscar-produto.component';
+import { DialogBuscarClienteComponent } from './carrinhos/dialog-buscar-cliente/dialog-buscar-cliente.component';
+import { DialogRemoverCarrinhoComponent } from './carrinhos/dialog-remover-carrinho/dialog-remover-carrinho.component';
+import { EditarCarrinhoComponent } from './carrinhos/editar-carrinho/editar-carrinho.component';
+import { DialogVisualizarProdutosComponent } from './carrinhos/dialog-visualizar-produtos/dialog-visualizar-produtos.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +34,14 @@ import { ProductRepositoryService } from './services/repositories/products/produ
     ListarProdutosComponent,
     DialogCadastrarProdutoComponent,
     DialogEditarProdutoComponent,
-    DialogExcluirProdutoComponent
+    DialogExcluirProdutoComponent,
+    ListarCarrinhosComponent,
+    CriarCarrinhoComponent,
+    DialogBuscarProdutoComponent,
+    DialogBuscarClienteComponent,
+    DialogRemoverCarrinhoComponent,
+    EditarCarrinhoComponent,
+    DialogVisualizarProdutosComponent
   ],
   imports: [
     BrowserModule,

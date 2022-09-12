@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+}
+
+.title-center {
+    text-align: center
+}
+
+td {
+    width: 16.66%;
+    text-align: center
+}
+
+th.mat-header-cell {
+    text-align: center !important;
+  }
