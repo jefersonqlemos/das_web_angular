@@ -3,9 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
 import { CarrinhoRepositoryService } from 'src/app/services/repositories/carrinhos/carrinho-repository.service';
-import { DialogRemoverCarrinhoComponent } from '../dialog-remover-carrinho/dialog-remover-carrinho.component';
 import { DialogVisualizarProdutosComponent } from '../dialog-visualizar-produtos/dialog-visualizar-produtos.component';
 import { ProdutosCarrinhoRepositoryService } from 'src/app/services/repositories/produtos-carrinho/produtos-carrinho-repository.service';
+import { DialogExcluirCarrinhoComponent } from '../dialog-excluir-carrinho/dialog-excluir-carrinho.component';
 
 @Component({
   selector: 'app-listar-carrinhos',
@@ -14,7 +14,7 @@ import { ProdutosCarrinhoRepositoryService } from 'src/app/services/repositories
 })
 export class ListarCarrinhosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'clienteId', 'valorTotal', 'visualizarProdutos', 'editar', 'excluir'];
+  displayedColumns: string[] = ['id', 'clienteId', 'valorTotal', 'visualizarProdutos', 'editar', 'excluir', 'enviarPedido'];
 
   constructor(
     public dialog: MatDialog,
@@ -59,8 +59,8 @@ export class ListarCarrinhosComponent implements OnInit {
     this.openDialogProdutos(DialogVisualizarProdutosComponent, produtos);
   }
 
-  removerCarrinho(carrinho: ICarrinho): void {
-    this.openDialog(DialogRemoverCarrinhoComponent, carrinho);
+  excluirCarrinho(carrinho: ICarrinho): void {
+    this.openDialog(DialogExcluirCarrinhoComponent, carrinho);
   }
 
   ngOnInit(): void {

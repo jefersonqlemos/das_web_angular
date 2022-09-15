@@ -7,10 +7,10 @@ table {
 }
 
 td {
-    width: 16.66%;
+    width: 12%;
     text-align: center
 }
 
 th.mat-header-cell {
     text-align: center !important;
-  }
+}

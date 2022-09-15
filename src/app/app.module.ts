@@ -24,9 +24,9 @@ import { ListarCarrinhosComponent } from './carrinhos/listar-carrinhos/listar-ca
 import { CriarCarrinhoComponent } from './carrinhos/criar-carrinho/criar-carrinho.component';
 import { DialogBuscarProdutoComponent } from './carrinhos/dialog-buscar-produto/dialog-buscar-produto.component';
 import { DialogBuscarClienteComponent } from './carrinhos/dialog-buscar-cliente/dialog-buscar-cliente.component';
-import { DialogRemoverCarrinhoComponent } from './carrinhos/dialog-remover-carrinho/dialog-remover-carrinho.component';
 import { EditarCarrinhoComponent } from './carrinhos/editar-carrinho/editar-carrinho.component';
 import { DialogVisualizarProdutosComponent } from './carrinhos/dialog-visualizar-produtos/dialog-visualizar-produtos.component';
+import { DialogExcluirCarrinhoComponent } from './carrinhos/dialog-excluir-carrinho/dialog-excluir-carrinho.component';
 
 @NgModule({
   declarations: [
@@ -39,9 +39,9 @@ import { DialogVisualizarProdutosComponent } from './carrinhos/dialog-visualizar
     CriarCarrinhoComponent,
     DialogBuscarProdutoComponent,
     DialogBuscarClienteComponent,
-    DialogRemoverCarrinhoComponent,
     EditarCarrinhoComponent,
-    DialogVisualizarProdutosComponent
+    DialogVisualizarProdutosComponent,
+    DialogExcluirCarrinhoComponent
   ],
   imports: [
     BrowserModule,

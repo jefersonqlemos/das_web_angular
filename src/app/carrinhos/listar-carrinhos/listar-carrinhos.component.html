@@ -65,8 +65,17 @@
                 <ng-container matColumnDef="excluir">
                     <th mat-header-cell *matHeaderCellDef> Remover </th>
                     <td mat-cell *matCellDef="let carrinho"> <button mat-icon-button color="warn"
-                            (click)="removerCarrinho(carrinho)">
+                            (click)="excluirCarrinho(carrinho)">
                             <mat-icon>delete</mat-icon>
+                        </button> </td>
+                </ng-container>
+
+                <!-- Editar Column -->
+                <ng-container matColumnDef="enviarPedido">
+                    <th mat-header-cell *matHeaderCellDef> Enviar para Pedido </th>
+                    <td mat-cell *matCellDef="let carrinho"> <button mat-icon-button color="primary"
+                            (click)="excluirCarrinho(carrinho)">
+                            <mat-icon>send</mat-icon>
                         </button> </td>
                 </ng-container>
 
