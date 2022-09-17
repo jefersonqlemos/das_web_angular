@@ -10,6 +10,7 @@ export class CriarCarrinhoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

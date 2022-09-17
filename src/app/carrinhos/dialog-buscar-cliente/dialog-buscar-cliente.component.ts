@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-buscar-cliente',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogBuscarClienteComponent implements OnInit {
 
-  constructor() { }
+  myControl = new FormControl('');
+
+  constructor( public dialogRef: MatDialogRef<DialogBuscarClienteComponent>,
+    @Inject(MAT_DIALOG_DATA) public options: string[] = ['One', 'Two', 'Three']) { }
 
   ngOnInit(): void {
   }

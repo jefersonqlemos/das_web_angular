@@ -4,9 +4,9 @@ import { GenericRepository } from '../generic.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutosCarrinhoRepositoryService extends GenericRepository {
-  constructor() {
+export class ClienteRepositoryService extends GenericRepository{
+  constructor() { 
     super();
-    this.configure('produtosCarrinho', 'produtoId');
+    this.configure('clientes', 'id');
   }
 }

@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ListarProdutosComponent } from './produtos/listar-produtos/listar-produtos.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogCadastrarProdutoComponent } from './produtos/dialog-cadastrar-produto/dialog-cadastrar-produto.component';
 import { DialogEditarProdutoComponent } from './produtos/dialog-editar-produto/dialog-editar-produto.component';
 import { DialogExcluirProdutoComponent } from './produtos/dialog-excluir-produto/dialog-excluir-produto.component';
@@ -27,6 +27,7 @@ import { DialogBuscarClienteComponent } from './carrinhos/dialog-buscar-cliente/
 import { EditarCarrinhoComponent } from './carrinhos/editar-carrinho/editar-carrinho.component';
 import { DialogVisualizarProdutosComponent } from './carrinhos/dialog-visualizar-produtos/dialog-visualizar-produtos.component';
 import { DialogExcluirCarrinhoComponent } from './carrinhos/dialog-excluir-carrinho/dialog-excluir-carrinho.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,9 @@ import { DialogExcluirCarrinhoComponent } from './carrinhos/dialog-excluir-carri
     MatDialogModule,
     MatInputModule,
     FormsModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [
     ProductRepositoryService
