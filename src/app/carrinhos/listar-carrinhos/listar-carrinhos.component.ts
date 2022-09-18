@@ -55,7 +55,8 @@ export class ListarCarrinhosComponent implements OnInit {
   }
 
   visualizarProdutos(carrinho: ICarrinho): void {
-    let produtos: any = this.repositoryServiceProdutos.getAll();
+    let produtos: any = this.repositoryServiceProdutos.getArrayItem(carrinho.id);
+    console.log(produtos);
     this.openDialogProdutos(DialogVisualizarProdutosComponent, produtos);
   }
 

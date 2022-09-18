@@ -23,7 +23,6 @@ import { ProductRepositoryService } from './services/repositories/products/produ
 import { ListarCarrinhosComponent } from './carrinhos/listar-carrinhos/listar-carrinhos.component';
 import { CriarCarrinhoComponent } from './carrinhos/criar-carrinho/criar-carrinho.component';
 import { DialogBuscarProdutoComponent } from './carrinhos/dialog-buscar-produto/dialog-buscar-produto.component';
-import { DialogBuscarClienteComponent } from './carrinhos/dialog-buscar-cliente/dialog-buscar-cliente.component';
 import { EditarCarrinhoComponent } from './carrinhos/editar-carrinho/editar-carrinho.component';
 import { DialogVisualizarProdutosComponent } from './carrinhos/dialog-visualizar-produtos/dialog-visualizar-produtos.component';
 import { DialogExcluirCarrinhoComponent } from './carrinhos/dialog-excluir-carrinho/dialog-excluir-carrinho.component';
@@ -39,7 +38,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     ListarCarrinhosComponent,
     CriarCarrinhoComponent,
     DialogBuscarProdutoComponent,
-    DialogBuscarClienteComponent,
     EditarCarrinhoComponent,
     DialogVisualizarProdutosComponent,
     DialogExcluirCarrinhoComponent

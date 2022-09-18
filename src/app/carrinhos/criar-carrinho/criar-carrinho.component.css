@@ -1,3 +1,15 @@
 .title-center {
     text-align: center
 }
+
+table {
+    width: 100%;
+}
+
+td {
+    width: 33.00%;
+}
+
+mat-form-field {
+    width: 100%;
+}

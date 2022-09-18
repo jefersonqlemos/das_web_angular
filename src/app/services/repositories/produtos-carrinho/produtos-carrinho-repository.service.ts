@@ -7,6 +7,6 @@ import { GenericRepository } from '../generic.service';
 export class ProdutosCarrinhoRepositoryService extends GenericRepository {
   constructor() {
     super();
-    this.configure('produtosCarrinho', 'produtoId');
+    this.configure('produtosCarrinho', 'carrinhoId');
   }
 }
