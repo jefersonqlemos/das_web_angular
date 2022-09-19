@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ICliente } from 'src/app/services/interfaces/ICliente';
 import { IProductModel } from 'src/app/services/interfaces/IProduct';
+import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
+import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
+import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
+import { DialogBuscarClienteComponent } from '../dialog-buscar-cliente/dialog-buscar-cliente.component';
+import { DialogBuscarProdutoComponent } from '../dialog-buscar-produto/dialog-buscar-produto.component';
 
 @Component({
   selector: 'app-criar-carrinho',
@@ -9,20 +15,66 @@ import { IProductModel } from 'src/app/services/interfaces/IProduct';
 })
 export class CriarCarrinhoComponent implements OnInit {
 
-  myControl = new FormControl('');
-  options: string[] = ['One', 'Two', 'Three'];
-  displayedColumns: string[] = [ 'produtoId', 'quantidade', 'valor'];
+  displayedColumns: string[] = [ 'produtoId', 'quantidade', 'valor', 'remover'];
 
-  produtos: IProductModel[] = [];
+  produtos: IProdutoCarrinho[] = [];
 
-  constructor() { }
+  nome: string = '';
+  id: string = '';
 
-  ngOnInit(): void {
+  constructor(public repositoryService: ClienteRepositoryService,
+    public repositoryServiceProduct: ProductRepositoryService,
+    public dialog: MatDialog) { 
+    }
+
+  private DIALOG_WIDTH = "50%"
+
+  ngOnInit(): void { }
+
+  adicionarProduto(){
+    let produtos: any = this.repositoryServiceProduct.getAll();
+    this.openDialogProdutos(DialogBuscarProdutoComponent, produtos)
+  }
+
+  adicionarCliente(){
+    let clientes: any = this.repositoryService.getAll();
+    this.openDialogClientes(DialogBuscarClienteComponent, clientes)
+  }
+
+  removerProduto(produto: IProductModel){
     
   }
 
-  adicionarProduto(){
-    
+  openDialogClientes(type: any, data?: ICliente[]): void {
+    const dialogRef = this.dialog.open(type, {
+      width: this.DIALOG_WIDTH,
+      data: data 
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.nome = result.clienteNome;
+      this.id = result.clienteId;
+      console.log('The dialog was closed');
+    });
+  }
+
+  openDialogProdutos(type: any, data?: IProductModel[]): void {
+    const dialogRef = this.dialog.open(type, {
+      width: this.DIALOG_WIDTH,
+      data: data 
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      const produto = this.repositoryServiceProduct.getItem(result.produtoId);
+      const produtoCarrinho: IProdutoCarrinho = {
+        "produto": produto,
+        "produtoId": produto.id,
+        "carrinhoId": 0,
+        "quantidade": 1 //rever
+      };
+      console.log(produtoCarrinho);
+      this.produtos.push(produtoCarrinho);
+    });
   }
 
 }

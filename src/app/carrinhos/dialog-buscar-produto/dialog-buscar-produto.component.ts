@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { map, Observable, startWith } from 'rxjs';
+import { IProductModel } from 'src/app/services/interfaces/IProduct';
+import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
 
 @Component({
   selector: 'app-dialog-buscar-produto',
@@ -7,9 +12,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogBuscarProdutoComponent implements OnInit {
 
-  constructor() { }
+  myControl = new FormControl('');
+  filteredProdutos?: Observable<IProductModel[]>;
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogBuscarProdutoComponent>,
+    @Inject(MAT_DIALOG_DATA) public produto: IProductModel,
+    public repositoryService: ProductRepositoryService
+  ) { }
+
+  produtos: IProductModel[] = this.repositoryService.getAll();
 
   ngOnInit(): void {
+    this.filteredProdutos = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(nome => this._filter(nome || ''))
+    );
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  private _filter(name: string): IProductModel[] {
+    const filterValue = name.toLowerCase();
+
+    return this.produtos.filter(produto => produto.name.toLowerCase().includes(filterValue));
+  }
+
+  produtoSelecionado(produto: any){
+    console.log(produto.option);
+    this.dialogRef.close({ produtoId: produto.option.id, produtoNome: produto.option.value })
   }
 
 }

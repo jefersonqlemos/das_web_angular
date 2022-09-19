@@ -1,16 +1,16 @@
-<h1 mat-dialog-title>Escolher Produto</h1>
+<h1 mat-dialog-title>Escolher Cliente</h1>
 <div mat-dialog-content>
     <form class="example-form">
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Produto</mat-label>
+          <mat-label>Cliente</mat-label>
           <input type="text"
                  aria-label="Number"
                  matInput
                  [formControl]="myControl"
                  [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="produtoSelecionado($event)">
-            <mat-option *ngFor="let produto of filteredProdutos | async" id={{produto.id}} [value]="produto.name">
-              {{produto.id}} - {{produto.name}} - R$ {{ produto.value | number :'1.2-2' }}
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clienteSelecionado($event)">
+            <mat-option *ngFor="let cliente of filteredClientes | async" id={{cliente.id}} [value]="cliente.nome">
+              {{cliente.nome}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>

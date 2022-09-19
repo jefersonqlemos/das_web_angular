@@ -17,22 +17,24 @@
                 <br>
             </section>
 
-            <form class="example-form">
-                <mat-form-field class="example-full-width" appearance="fill">
-                  <mat-label>Cliente</mat-label>
-                  <input type="text"
-                         placeholder="Pick one"
-                         aria-label="Number"
-                         matInput
-                         [formControl]="myControl"
-                         [matAutocomplete]="auto">
-                  <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of options" [value]="option">
-                      {{option}}
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-            </form>
+            <section>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button style="float:right" mat-raised-button color="primary"
+                            (click)="adicionarCliente()">Escolher Cliente</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Cliente</mat-label>
+                            <input [readonly]="true" matInput [(ngModel)]="nome" id={{id}} required>
+                          </mat-form-field>
+                    </div>
+                </div>
+            </section>
 
             <section>
                 <br>
@@ -65,6 +67,15 @@
                 <ng-container matColumnDef="valor">
                     <th mat-header-cell *matHeaderCellDef> Valor </th>
                     <td mat-cell *matCellDef="let produto">R$ {{produto.produto.valor | number :'1.2-2'}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="remover">
+                    <th mat-header-cell *matHeaderCellDef> Remover </th>
+                    <td mat-cell *matCellDef="let produto"><button mat-icon-button color="warn"
+                        (click)="removerProduto(produto)">
+                        <mat-icon>delete</mat-icon>
+                    </button> </td>
                 </ng-container>
             
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -27,6 +27,8 @@ import { EditarCarrinhoComponent } from './carrinhos/editar-carrinho/editar-carr
 import { DialogVisualizarProdutosComponent } from './carrinhos/dialog-visualizar-produtos/dialog-visualizar-produtos.component';
 import { DialogExcluirCarrinhoComponent } from './carrinhos/dialog-excluir-carrinho/dialog-excluir-carrinho.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
+import { DialogBuscarClienteComponent } from './carrinhos/dialog-buscar-cliente/dialog-buscar-cliente.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     DialogBuscarProdutoComponent,
     EditarCarrinhoComponent,
     DialogVisualizarProdutosComponent,
-    DialogExcluirCarrinhoComponent
+    DialogExcluirCarrinhoComponent,
+    DialogBuscarClienteComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     FormsModule,
     CurrencyMaskModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule
   ],
   providers: [
     ProductRepositoryService

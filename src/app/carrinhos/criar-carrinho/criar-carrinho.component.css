@@ -7,7 +7,11 @@ table {
 }
 
 td {
-    width: 33.00%;
+    width: 25%;
+}
+
+th {
+    width: 25%;
 }
 
 mat-form-field {
