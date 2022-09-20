@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
 import { ICliente } from 'src/app/services/interfaces/ICliente';
 import { IProductModel } from 'src/app/services/interfaces/IProduct';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
@@ -41,8 +42,13 @@ export class CriarCarrinhoComponent implements OnInit {
     this.openDialogClientes(DialogBuscarClienteComponent, clientes)
   }
 
-  removerProduto(produto: IProductModel){
-    
+  removerProduto(produto: IProdutoCarrinho){
+    console.log(produto.produtoId);
+    this.produtos = this.produtos.filter((u) => u.produto.id !== produto.produtoId);
+  }
+
+  salvarCarrinho(){
+
   }
 
   openDialogClientes(type: any, data?: ICliente[]): void {
@@ -72,8 +78,9 @@ export class CriarCarrinhoComponent implements OnInit {
         "carrinhoId": 0,
         "quantidade": 1 //rever
       };
-      console.log(produtoCarrinho);
-      this.produtos.push(produtoCarrinho);
+      console.log(produto);
+      //this.produtos.push(produtoCarrinho);
+      this.produtos = [...this.produtos, produtoCarrinho];
     });
   }
 

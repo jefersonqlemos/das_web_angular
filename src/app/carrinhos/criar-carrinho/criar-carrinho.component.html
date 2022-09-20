@@ -54,7 +54,7 @@
                 <!-- Position Column -->
                 <ng-container matColumnDef="produtoId">
                     <th mat-header-cell *matHeaderCellDef> Nome Produto </th>
-                    <td mat-cell *matCellDef="let produto"> {{produto.produto.nome}} </td>
+                    <td mat-cell *matCellDef="let produto"> {{produto.produto.name}} </td>
                 </ng-container>
             
                 <!-- Name Column -->
@@ -66,7 +66,7 @@
                 <!-- Weight Column -->
                 <ng-container matColumnDef="valor">
                     <th mat-header-cell *matHeaderCellDef> Valor </th>
-                    <td mat-cell *matCellDef="let produto">R$ {{produto.produto.valor | number :'1.2-2'}} </td>
+                    <td mat-cell *matCellDef="let produto">R$ {{produto.produto.value | number :'1.2-2'}} </td>
                 </ng-container>
 
                 <!-- Weight Column -->
@@ -81,6 +81,17 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+
+            <section>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button style="float:right" mat-raised-button color="primary"
+                            (click)="salvarCarrinho()">Salvar Carrinho</button>
+                    </div>
+                </div>
+                <br>
+            </section>
         </div>
     </div>
 </div>
