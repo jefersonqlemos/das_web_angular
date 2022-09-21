@@ -10,7 +10,7 @@
                  [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clienteSelecionado($event)">
             <mat-option *ngFor="let cliente of filteredClientes | async" id={{cliente.id}} [value]="cliente.nome">
-              {{cliente.nome}}
+              {{cliente.nome}} {{ cliente.sobrenome }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>

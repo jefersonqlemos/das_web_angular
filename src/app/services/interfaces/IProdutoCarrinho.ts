@@ -1,8 +1,8 @@
 import { IProductModel } from "./IProduct";
 
 export interface IProdutoCarrinho{
+    id: number;
     quantidade: number;
     carrinhoId: number;
-    produtoId: number;
     produto: IProductModel;
 }

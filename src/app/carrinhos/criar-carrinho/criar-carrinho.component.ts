@@ -43,8 +43,8 @@ export class CriarCarrinhoComponent implements OnInit {
   }
 
   removerProduto(produto: IProdutoCarrinho){
-    console.log(produto.produtoId);
-    this.produtos = this.produtos.filter((u) => u.produto.id !== produto.produtoId);
+    console.log(produto.produto.id);
+    this.produtos = this.produtos.filter((u) => u.produto.id !== produto.produto.id);
   }
 
   salvarCarrinho(){
@@ -73,10 +73,10 @@ export class CriarCarrinhoComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       const produto = this.repositoryServiceProduct.getItem(result.produtoId);
       const produtoCarrinho: IProdutoCarrinho = {
+        "id": 0,
         "produto": produto,
-        "produtoId": produto.id,
         "carrinhoId": 0,
-        "quantidade": 1 //rever
+        "quantidade": result.quantidade
       };
       console.log(produto);
       //this.produtos.push(produtoCarrinho);

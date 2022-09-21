@@ -33,7 +33,7 @@
                 <!-- Name Column -->
                 <ng-container matColumnDef="clienteId">
                     <th mat-header-cell *matHeaderCellDef> Nome Cliente </th>
-                    <td mat-cell *matCellDef="let carrinho"> {{carrinho.cliente.nome}} </td>
+                    <td mat-cell *matCellDef="let carrinho"> {{carrinho.cliente.nome}} {{carrinho.cliente.sobrenome}} </td>
                 </ng-container>
 
                 <!-- Weight Column -->

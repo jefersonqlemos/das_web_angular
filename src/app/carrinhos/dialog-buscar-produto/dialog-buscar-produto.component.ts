@@ -40,9 +40,9 @@ export class DialogBuscarProdutoComponent implements OnInit {
     return this.produtos.filter(produto => produto.name.toLowerCase().includes(filterValue));
   }
 
-  produtoSelecionado(produto: any){
-    console.log(produto.option);
-    this.dialogRef.close({ produtoId: produto.option.id, produtoNome: produto.option.value })
+  produtoSelecionado(produto: any, quantidade: any){
+    console.log(quantidade);
+    this.dialogRef.close({ produtoId: produto.option.id, produtoNome: produto.option.value, quantidade: quantidade})
   }
 
 }
