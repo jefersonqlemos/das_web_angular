@@ -6,6 +6,7 @@ import { CarrinhoRepositoryService } from 'src/app/services/repositories/carrinh
 import { DialogVisualizarProdutosComponent } from '../dialog-visualizar-produtos/dialog-visualizar-produtos.component';
 import { ProdutosCarrinhoRepositoryService } from 'src/app/services/repositories/produtos-carrinho/produtos-carrinho-repository.service';
 import { DialogExcluirCarrinhoComponent } from '../dialog-excluir-carrinho/dialog-excluir-carrinho.component';
+import { ProdutosCarrinhoByCarrinhoidService } from 'src/app/services/repositories/produtos-carrinho-by-carrinhoid/produtos-carrinho-by-carrinhoid.service';
 
 @Component({
   selector: 'app-listar-carrinhos',
@@ -19,7 +20,8 @@ export class ListarCarrinhosComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public repositoryService: CarrinhoRepositoryService,
-    public repositoryServiceProdutos: ProdutosCarrinhoRepositoryService 
+    public repositoryServiceProdutos: ProdutosCarrinhoRepositoryService,
+    public repositoryServiceProdutosCarrinhosByIdCarrinho: ProdutosCarrinhoByCarrinhoidService  
     ) { }
 
   LISTA_CARRINHOS: ICarrinho[] = this.repositoryService.getAll();
@@ -55,8 +57,7 @@ export class ListarCarrinhosComponent implements OnInit {
   }
 
   visualizarProdutos(carrinho: ICarrinho): void {
-    let produtos: any = this.repositoryServiceProdutos.getArrayItem(carrinho.id);
-    console.log(produtos);
+    let produtos: any = this.repositoryServiceProdutosCarrinhosByIdCarrinho.getArrayItem(carrinho.id);
     this.openDialogProdutos(DialogVisualizarProdutosComponent, produtos);
   }
 
