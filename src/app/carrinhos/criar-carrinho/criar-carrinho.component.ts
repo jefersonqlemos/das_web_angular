@@ -57,7 +57,7 @@ export class CriarCarrinhoComponent implements OnInit {
 
     var valorTotal = 0;
     this.produtos.forEach(function (value) {
-        valorTotal = valorTotal + value.produto.value;
+        valorTotal = valorTotal + value.produto.value*value.quantidade;
     });
 
     const carrinho: ICarrinho = {
