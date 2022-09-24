@@ -52,10 +52,6 @@ export class ListarCarrinhosComponent implements OnInit {
     });
   }
 
-  editarCarrinho(carrinho: ICarrinho): void {
-    
-  }
-
   visualizarProdutos(carrinho: ICarrinho): void {
     let produtos: any = this.repositoryServiceProdutosCarrinhosByIdCarrinho.getArrayItem(carrinho.id);
     this.openDialogProdutos(DialogVisualizarProdutosComponent, produtos);

@@ -1,1 +1,97 @@
-<p>editar-carrinho works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <section>
+                <br>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <button mat-raised-button routerLink="/listar-carrinhos">
+                            <mat-icon>arrow_back</mat-icon>
+                        </button>
+                    </div>
+                    <div class="col-sm-4">
+                        <h2 class="title-center">Editando Carrinho</h2>
+                    </div>
+                </div>
+                <br>
+            </section>
+
+            <section>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button style="float:right" mat-raised-button color="primary"
+                            (click)="adicionarCliente()">Escolher Cliente</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Cliente</mat-label>
+                            <input [readonly]="true" name={{id}} matInput [(ngModel)]="nome" id="nome" value={{nome}} required>
+                          </mat-form-field>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button style="float:right" mat-raised-button color="primary"
+                            (click)="adicionarProduto()">Adicionar Produto</button>
+                    </div>
+                </div>
+                <br>
+            </section>
+
+            <table mat-table [dataSource]="produtos" class="mat-elevation-z8">
+                <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+            
+                <!-- Position Column -->
+                <ng-container matColumnDef="produtoId">
+                    <th mat-header-cell *matHeaderCellDef> Nome Produto </th>
+                    <td mat-cell *matCellDef="let produto"> {{produto.produto.name}} </td>
+                </ng-container>
+            
+                <!-- Name Column -->
+                <ng-container matColumnDef="quantidade">
+                    <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+                    <td mat-cell *matCellDef="let produto"> {{produto.quantidade}} </td>
+                </ng-container>
+            
+                <!-- Weight Column -->
+                <ng-container matColumnDef="valor">
+                    <th mat-header-cell *matHeaderCellDef> Valor </th>
+                    <td mat-cell *matCellDef="let produto">R$ {{produto.produto.value | number :'1.2-2'}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="remover">
+                    <th mat-header-cell *matHeaderCellDef> Remover </th>
+                    <td mat-cell *matCellDef="let produto"><button mat-icon-button color="warn"
+                        (click)="removerProduto(produto)">
+                        <mat-icon>delete</mat-icon>
+                    </button> </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <section>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button style="float:right" mat-raised-button color="primary"
+                            (click)="salvarCarrinho()">Salvar Carrinho</button>
+                    </div>
+                </div>
+                <br>
+            </section>
+        </div>
+    </div>
+</div>
