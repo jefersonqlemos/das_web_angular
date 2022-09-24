@@ -77,25 +77,20 @@ export class EditarCarrinhoComponent implements OnInit {
     let cliente = this.repositoryService.getItem(id);
 
     var valorTotal = 0;
-    this.produtos.forEach(function (value) {
+    this.produtos.forEach((value) => {
         valorTotal = valorTotal + value.produto.value*value.quantidade;
+        this.repositoryServiceProdutoCarrinho.remove(value.id);
+        value.carrinhoId = this.carrinho.id;
+        this.repositoryServiceProdutoCarrinho.add(value);
     });
 
     const carrinho: ICarrinho = {
-        "id": 0,
+        "id": this.carrinho.id,
         "cliente": cliente, 
         "valorTotal": valorTotal
     }; 
     
-    this.repositoryServiceCarrinho.add(carrinho)
-    var carrinhos: ICarrinho[] = this.repositoryServiceCarrinho.getAll();
-
-    var idcarrinho = carrinhos[carrinhos.length-1].id;
-
-    this.produtos.forEach((value) => {
-        value.carrinhoId = idcarrinho;
-        this.repositoryServiceProdutoCarrinho.add(value);
-    });
+    this.repositoryServiceCarrinho.update(carrinho);
 
     console.log(this.produtos);
 
