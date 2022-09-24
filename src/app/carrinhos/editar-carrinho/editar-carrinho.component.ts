@@ -23,6 +23,7 @@ export class EditarCarrinhoComponent implements OnInit {
   displayedColumns: string[] = [ 'produtoId', 'quantidade', 'valor', 'remover'];
 
   produtos: IProdutoCarrinho[] = [];
+  produtosExclusao: IProdutoCarrinho[] = [];
   carrinho: ICarrinho = {
     id: 0,
     valorTotal: 0,
@@ -51,6 +52,7 @@ export class EditarCarrinhoComponent implements OnInit {
     let carrinhoId = this.route.snapshot.params['carrinhoId'];
     this.carrinho = this.repositoryServiceCarrinho.getItem(carrinhoId);
     this.produtos = this.repositoryServiceProdutoCarrinhoByCarrinhoId.getArrayItem(carrinhoId);
+    this.produtosExclusao = this.repositoryServiceProdutoCarrinhoByCarrinhoId.getArrayItem(carrinhoId);
     this.nome = this.carrinho.cliente.nome;
     this.id = this.carrinho.cliente.id;
   }
@@ -79,9 +81,12 @@ export class EditarCarrinhoComponent implements OnInit {
     var valorTotal = 0;
     this.produtos.forEach((value) => {
         valorTotal = valorTotal + value.produto.value*value.quantidade;
-        this.repositoryServiceProdutoCarrinho.remove(value.id);
         value.carrinhoId = this.carrinho.id;
         this.repositoryServiceProdutoCarrinho.add(value);
+    });
+
+    this.produtosExclusao.forEach((value) => {
+      this.repositoryServiceProdutoCarrinho.remove(value.id);
     });
 
     const carrinho: ICarrinho = {
