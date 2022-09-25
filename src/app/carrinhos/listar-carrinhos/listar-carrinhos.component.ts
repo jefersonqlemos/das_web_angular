@@ -7,6 +7,7 @@ import { DialogVisualizarProdutosComponent } from '../dialog-visualizar-produtos
 import { ProdutosCarrinhoRepositoryService } from 'src/app/services/repositories/produtos-carrinho/produtos-carrinho-repository.service';
 import { DialogExcluirCarrinhoComponent } from '../dialog-excluir-carrinho/dialog-excluir-carrinho.component';
 import { ProdutosCarrinhoByCarrinhoidService } from 'src/app/services/repositories/produtos-carrinho-by-carrinhoid/produtos-carrinho-by-carrinhoid.service';
+import { DialogTransformarPedidoComponent } from '../dialog-transformar-pedido/dialog-transformar-pedido.component';
 
 @Component({
   selector: 'app-listar-carrinhos',
@@ -59,6 +60,10 @@ export class ListarCarrinhosComponent implements OnInit {
 
   excluirCarrinho(carrinho: ICarrinho): void {
     this.openDialog(DialogExcluirCarrinhoComponent, carrinho);
+  }
+
+  transformarPedido(carrinho: ICarrinho): void {
+    this.openDialog(DialogTransformarPedidoComponent, carrinho);
   }
 
   ngOnInit(): void {

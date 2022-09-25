@@ -29,6 +29,8 @@ import { DialogExcluirCarrinhoComponent } from './carrinhos/dialog-excluir-carri
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { DialogBuscarClienteComponent } from './carrinhos/dialog-buscar-cliente/dialog-buscar-cliente.component';
+import { DialogTransformarPedidoComponent } from './carrinhos/dialog-transformar-pedido/dialog-transformar-pedido.component';
+import { ListarPedidosComponent } from './pedidos/listar-pedidos/listar-pedidos.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { DialogBuscarClienteComponent } from './carrinhos/dialog-buscar-cliente/
     EditarCarrinhoComponent,
     DialogVisualizarProdutosComponent,
     DialogExcluirCarrinhoComponent,
-    DialogBuscarClienteComponent
+    DialogBuscarClienteComponent,
+    DialogTransformarPedidoComponent,
+    ListarPedidosComponent
   ],
   imports: [
     BrowserModule,
