@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Finalizar Carrinho</h1>
+<div mat-dialog-content>
+      <p>O carrinho será transformado em pedido e não podera mais ser realizada modificações após finalizado, continuar?</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Não</button>
+    <button mat-raised-button cdkFocusInitial (click)="finalizar(carrinho)" color="primary">Sim</button>
+</div>

@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <section>
+                <br>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <button mat-raised-button routerLink="">
+                            <mat-icon>arrow_back</mat-icon>
+                        </button>
+                    </div>
+                    <div class="col-sm-4">
+                        <h2 class="title-center">Lista de Carrinhos</h2>
+                    </div>
+                    <div class="col-sm-4">
+                        <button style="float:right" routerLink="/criar-carrinho" mat-raised-button color="primary">Criar</button>
+                    </div>
+                </div>
+                <br>
+            </section>
+
+            <table mat-table [dataSource]="carrinhos" class="mat-elevation-z8">
+                <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let carrinho"> {{carrinho.id}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="clienteId">
+                    <th mat-header-cell *matHeaderCellDef> Nome Cliente </th>
+                    <td mat-cell *matCellDef="let carrinho"> {{carrinho.cliente.nome}} {{carrinho.cliente.sobrenome}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="valorTotal">
+                    <th mat-header-cell *matHeaderCellDef> Valor Total </th>
+                    <td mat-cell *matCellDef="let carrinho">R$ {{carrinho.valorTotal | number :'1.2-2'}} </td>
+                </ng-container>
+
+                <!-- Editar Column -->
+                <ng-container matColumnDef="visualizarProdutos">
+                    <th mat-header-cell *matHeaderCellDef> Visualizar Produtos </th>
+                    <td mat-cell *matCellDef="let carrinho"> 
+                        <button mat-icon-button color="primary"
+                            (click)="visualizarProdutos(carrinho)">
+                            <mat-icon>view_list</mat-icon>
+                        </button> </td>
+                </ng-container>
+
+                <!-- Editar Column -->
+                <ng-container matColumnDef="editar">
+                    <th mat-header-cell *matHeaderCellDef> Editar </th>
+                    <td mat-cell *matCellDef="let carrinho"> <button mat-icon-button color="primary"
+                            [routerLink]="['/editar-carrinho/', carrinho.id]">
+                            <mat-icon>edit</mat-icon>
+                        </button> </td>
+                </ng-container>
+
+                <!-- Editar Column -->
+                <ng-container matColumnDef="excluir">
+                    <th mat-header-cell *matHeaderCellDef> Remover </th>
+                    <td mat-cell *matCellDef="let carrinho"> <button mat-icon-button color="warn"
+                            (click)="excluirCarrinho(carrinho)">
+                            <mat-icon>delete</mat-icon>
+                        </button> </td>
+                </ng-container>
+
+                <!-- Editar Column -->
+                <ng-container matColumnDef="enviarPedido">
+                    <th mat-header-cell *matHeaderCellDef> Enviar para Pedido </th>
+                    <td mat-cell *matCellDef="let carrinho"> <button mat-icon-button color="primary"
+                            (click)="transformarPedido(carrinho)">
+                            <mat-icon>send</mat-icon>
+                        </button> </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </div>
+    </div>
+</div>

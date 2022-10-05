@@ -65,6 +65,11 @@ export class GenericRepository {
   getItem(key: any): any {
     return this.list.find((i) => i[this.itemKey] == key);
   }
+
+  getArrayItem(key: any): any {
+    return this.list.filter((i) => i[this.itemKey] == key);
+  }
+
   getAll() {
     return this.list;
   }

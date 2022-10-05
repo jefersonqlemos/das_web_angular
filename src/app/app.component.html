@@ -3,9 +3,17 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </button>
       <button mat-menu-item routerLink="/listar-produtos">
         <mat-icon>inbox</mat-icon>
         <span>Produtos</span>
+      </button>
+      <button mat-menu-item routerLink="/listar-carrinhos">
+        <mat-icon>shopping_cart</mat-icon>
+        <span>Carrinhos</span>
       </button>
       <button mat-menu-item routerLink="">
         <mat-icon>format_list_bulleted</mat-icon>

@@ -14,12 +14,23 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ListarProdutosComponent } from './produtos/listar-produtos/listar-produtos.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogCadastrarProdutoComponent } from './produtos/dialog-cadastrar-produto/dialog-cadastrar-produto.component';
 import { DialogEditarProdutoComponent } from './produtos/dialog-editar-produto/dialog-editar-produto.component';
 import { DialogExcluirProdutoComponent } from './produtos/dialog-excluir-produto/dialog-excluir-produto.component';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { ProductRepositoryService } from './services/repositories/products/product-repository.service';
+import { ListarCarrinhosComponent } from './carrinhos/listar-carrinhos/listar-carrinhos.component';
+import { CriarCarrinhoComponent } from './carrinhos/criar-carrinho/criar-carrinho.component';
+import { DialogBuscarProdutoComponent } from './carrinhos/dialog-buscar-produto/dialog-buscar-produto.component';
+import { EditarCarrinhoComponent } from './carrinhos/editar-carrinho/editar-carrinho.component';
+import { DialogVisualizarProdutosComponent } from './carrinhos/dialog-visualizar-produtos/dialog-visualizar-produtos.component';
+import { DialogExcluirCarrinhoComponent } from './carrinhos/dialog-excluir-carrinho/dialog-excluir-carrinho.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
+import { DialogBuscarClienteComponent } from './carrinhos/dialog-buscar-cliente/dialog-buscar-cliente.component';
+import { DialogTransformarPedidoComponent } from './carrinhos/dialog-transformar-pedido/dialog-transformar-pedido.component';
+import { ListarPedidosComponent } from './pedidos/listar-pedidos/listar-pedidos.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +38,16 @@ import { ProductRepositoryService } from './services/repositories/products/produ
     ListarProdutosComponent,
     DialogCadastrarProdutoComponent,
     DialogEditarProdutoComponent,
-    DialogExcluirProdutoComponent
+    DialogExcluirProdutoComponent,
+    ListarCarrinhosComponent,
+    CriarCarrinhoComponent,
+    DialogBuscarProdutoComponent,
+    EditarCarrinhoComponent,
+    DialogVisualizarProdutosComponent,
+    DialogExcluirCarrinhoComponent,
+    DialogBuscarClienteComponent,
+    DialogTransformarPedidoComponent,
+    ListarPedidosComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +63,10 @@ import { ProductRepositoryService } from './services/repositories/products/produ
     MatDialogModule,
     MatInputModule,
     FormsModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatCardModule
   ],
   providers: [
     ProductRepositoryService
