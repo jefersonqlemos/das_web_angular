@@ -31,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
 import { DialogBuscarClienteComponent } from './carrinhos/dialog-buscar-cliente/dialog-buscar-cliente.component';
 import { DialogTransformarPedidoComponent } from './carrinhos/dialog-transformar-pedido/dialog-transformar-pedido.component';
 import { ListarPedidosComponent } from './pedidos/listar-pedidos/listar-pedidos.component';
+import { DialogVisualizarProdutosPedidosComponent } from './pedidos/dialog-visualizar-produtos-pedidos/dialog-visualizar-produtos-pedidos.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ListarPedidosComponent } from './pedidos/listar-pedidos/listar-pedidos.
     DialogExcluirCarrinhoComponent,
     DialogBuscarClienteComponent,
     DialogTransformarPedidoComponent,
-    ListarPedidosComponent
+    ListarPedidosComponent,
+    DialogVisualizarProdutosPedidosComponent
   ],
   imports: [
     BrowserModule,

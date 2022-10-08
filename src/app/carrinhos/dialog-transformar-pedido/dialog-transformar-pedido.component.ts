@@ -4,6 +4,7 @@ import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
 import { IPedido } from 'src/app/services/interfaces/IPedido';
 import { IProductModel } from 'src/app/services/interfaces/IProduct';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
+import { IProdutoPedido } from 'src/app/services/interfaces/IProdutoPedido';
 import { CarrinhoRepositoryService } from 'src/app/services/repositories/carrinhos/carrinho-repository.service';
 import { PedidoRepositoryService } from 'src/app/services/repositories/pedidos/pedido-repository.service';
 import { ProdutosCarrinhoByCarrinhoidService } from 'src/app/services/repositories/produtos-carrinho-by-carrinhoid/produtos-carrinho-by-carrinhoid.service';
@@ -35,10 +36,16 @@ export class DialogTransformarPedidoComponent implements OnInit {
 
     const produtosCarrinho = this.produtosCarrinhoByCarrinhoIdRepositoryService.getArrayItem(carrinho.id);
 
-    var produtos: IProductModel[] = [];
+    var produtos: IProdutoPedido[] = [];
 
     produtosCarrinho.forEach((produtoCarrinho: IProdutoCarrinho) => {
-      produtos.push(produtoCarrinho.produto);
+      const produto_pedido: IProdutoPedido = {
+        "id": produtoCarrinho.id,
+        "quantidade": produtoCarrinho.quantidade,
+        "produto": produtoCarrinho.produto
+      };
+
+      produtos.push(produto_pedido);
     });
 
     const pedido: IPedido = {
