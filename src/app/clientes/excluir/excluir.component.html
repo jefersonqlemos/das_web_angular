@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Excluir Cliente</h1>
+<div mat-dialog-content>
+      <p>Essa ação excluira o cliente, deseja continuar?</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Não</button>
+    <button mat-raised-button cdkFocusInitial (click)="excluirCliente(cliente)" color="primary">Sim</button>
+</div>
+

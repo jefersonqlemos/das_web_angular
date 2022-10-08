@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Cadastrar Cliente</h1>
+<form #formCliente="ngForm" (ngSubmit)="armazenarCliente(formCliente.value)">
+  <div mat-dialog-content>
+      <!-- <mat-form-field appearance="fill" [style.width.%]=100>
+        <mat-label>ID</mat-label>
+        <input matInput type="number" name="id" required ngModel>
+      </mat-form-field>
+      <br> -->
+      <mat-form-field appearance="fill" [style.width.%]=50>
+        <mat-label>Nome</mat-label>
+        <input matInput name="name" required ngModel>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill" [style.width.%]=50>
+        <mat-label>Sobrenome</mat-label>
+        <input matInput name="sobrenome" required ngModel>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill" [style.width.%]=100>
+        <mat-label>CPF</mat-label>
+        <input matInput name="cpf" required ngModel>
+      </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button type="button" mat-raised-button (click)="onNoClick()">Cancelar</button>
+    <button mat-raised-button cdkFocusInitial color="primary">Concluir</button>
+  </div>
+</form>

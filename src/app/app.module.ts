@@ -32,6 +32,10 @@ import { DialogBuscarClienteComponent } from './carrinhos/dialog-buscar-cliente/
 import { DialogTransformarPedidoComponent } from './carrinhos/dialog-transformar-pedido/dialog-transformar-pedido.component';
 import { ListarPedidosComponent } from './pedidos/listar-pedidos/listar-pedidos.component';
 import { DialogVisualizarProdutosPedidosComponent } from './pedidos/dialog-visualizar-produtos-pedidos/dialog-visualizar-produtos-pedidos.component';
+import { InserirClienteComponent } from './clientes/inserir/inserir.component';
+import { EditarClienteComponent } from './clientes/editar/editar.component';
+import { ExcluirClienteComponent } from './clientes/excluir/excluir.component';
+import { ListarClientesComponent } from './clientes/listar/listar.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,11 @@ import { DialogVisualizarProdutosPedidosComponent } from './pedidos/dialog-visua
     DialogBuscarClienteComponent,
     DialogTransformarPedidoComponent,
     ListarPedidosComponent,
-    DialogVisualizarProdutosPedidosComponent
+    DialogVisualizarProdutosPedidosComponent,
+    InserirClienteComponent,
+    EditarClienteComponent,
+    ExcluirClienteComponent,
+    ListarClientesComponent
   ],
   imports: [
     BrowserModule,

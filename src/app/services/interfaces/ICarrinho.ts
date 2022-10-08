@@ -1,7 +1,7 @@
-import { ICliente } from "./ICliente";
+import { IClienteModel } from "./ICliente";
 
 export interface ICarrinho {
   id: number;
   valorTotal: number;
-  cliente: ICliente;
+  cliente: IClienteModel;
 }

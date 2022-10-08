@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
-import { ICliente } from 'src/app/services/interfaces/ICliente';
+import { IClienteModel } from 'src/app/services/interfaces/ICliente';
 import { IProductModel } from 'src/app/services/interfaces/IProduct';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
 import { CarrinhoRepositoryService } from 'src/app/services/repositories/carrinhos/carrinho-repository.service';
@@ -81,7 +81,7 @@ export class CriarCarrinhoComponent implements OnInit {
     window.location.href = 'listar-carrinhos';
   }
 
-  openDialogClientes(type: any, data?: ICliente[]): void {
+  openDialogClientes(type: any, data?: IClienteModel[]): void {
     const dialogRef = this.dialog.open(type, {
       width: this.DIALOG_WIDTH,
       data: data 
