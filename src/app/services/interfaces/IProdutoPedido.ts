@@ -1,8 +1,7 @@
 import { IProductModel } from "./IProduct";
 
-export interface IProdutoPedido extends IProductModel{
+export interface IProdutoPedido{
+    id: number;
     quantidade: number;
-    valor: number;
-    produtoId: number;
     produto: IProductModel;
 }
