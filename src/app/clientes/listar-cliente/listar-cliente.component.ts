@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IClienteModel } from 'src/app/services/interfaces/ICliente';
 import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
-import { EditarClienteComponent } from '../editar/editar.component';
-import { ExcluirClienteComponent } from '../excluir/excluir.component';
-import { InserirClienteComponent } from '../inserir/inserir-cliente.component';
+import { EditarClienteComponent } from '../editar-cliente/editar-cliente.component';
+import { ExcluirClienteComponent } from '../excluir-cliente/excluir-cliente.component';
+import { InserirClienteComponent } from '../inserir-cliente/inserir-cliente.component';
 
 @Component({
-  selector: 'app-listar-clientes',
-  templateUrl: './listar.component.html',
-  styleUrls: ['./listar.component.css'],
+  selector: 'app-listar-cliente',
+  templateUrl: './listar-cliente.component.html',
+  styleUrls: ['./listar-cliente.component.css'],
 })
-export class ListarClientesComponent implements OnInit {
+export class ListarClienteComponent implements OnInit {
   displayedColumns: string[] = ['id', 'fullName', 'cpf', 'editar', 'excluir'];
 
   constructor(
