@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { ICliente } from 'src/app/services/interfaces/ICliente';
+import { IClienteModel } from 'src/app/services/interfaces/ICliente';
 import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
 
 @Component({
@@ -14,15 +14,15 @@ import { ClienteRepositoryService } from 'src/app/services/repositories/clientes
 export class DialogBuscarClienteComponent implements OnInit {
 
   myControl = new FormControl('');
-  filteredClientes?: Observable<ICliente[]>;
+  filteredClientes?: Observable<IClienteModel[]>;
 
   constructor(
     public dialogRef: MatDialogRef<DialogBuscarClienteComponent>,
-    @Inject(MAT_DIALOG_DATA) public cliente: ICliente,
+    @Inject(MAT_DIALOG_DATA) public cliente: IClienteModel,
     public repositoryService: ClienteRepositoryService
   ) { }
 
-  clientes: ICliente[] = this.repositoryService.getAll();
+  clientes: IClienteModel[] = this.repositoryService.getAll();
 
   ngOnInit(): void {
     this.filteredClientes = this.myControl.valueChanges.pipe(
@@ -35,7 +35,7 @@ export class DialogBuscarClienteComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private _filter(nome: string): ICliente[] {
+  private _filter(nome: string): IClienteModel[] {
     const filterValue = nome.toLowerCase();
 
     return this.clientes.filter(cliente => cliente.nome.toLowerCase().includes(filterValue));
