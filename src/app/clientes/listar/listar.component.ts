@@ -4,7 +4,7 @@ import { IClienteModel } from 'src/app/services/interfaces/ICliente';
 import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
 import { EditarClienteComponent } from '../editar/editar.component';
 import { ExcluirClienteComponent } from '../excluir/excluir.component';
-import { InserirClienteComponent } from '../inserir/inserir.component';
+import { InserirClienteComponent } from '../inserir/inserir-cliente.component';
 
 @Component({
   selector: 'app-listar-clientes',
