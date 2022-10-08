@@ -36,6 +36,7 @@ import { InserirClienteComponent } from './clientes/inserir-cliente/inserir-clie
 import { EditarClienteComponent } from './clientes/editar-cliente/editar-cliente.component';
 import { ExcluirClienteComponent } from './clientes/excluir-cliente/excluir-cliente.component';
 import { ListarClienteComponent } from './clientes/listar-cliente/listar-cliente.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ListarClienteComponent } from './clientes/listar-cliente/listar-cliente
     InserirClienteComponent,
     EditarClienteComponent,
     ExcluirClienteComponent,
-    ListarClienteComponent
+    ListarClienteComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
