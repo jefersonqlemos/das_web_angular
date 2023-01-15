@@ -1,24 +1,24 @@
 <h1 mat-dialog-title>Editar Cliente</h1>
-<form #formCliente="ngForm" (ngSubmit)="atualizarCliente(formCliente.value)">
+<form #formCliente="ngForm" (ngSubmit)="updateClient(formCliente.value)">
     <div mat-dialog-content>
         <mat-form-field appearance="fill" [style.width.%]=100>
             <mat-label>ID</mat-label>
-            <input matInput type="number" name="id" [(ngModel)]="cliente.id" required>
+            <input matInput type="number" name="id" [(ngModel)]="client.id" required>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill" [style.width.%]=100>
             <mat-label>Nome</mat-label>
-            <input matInput name="name" [(ngModel)]="cliente.nome" required>
+            <input matInput name="name" [(ngModel)]="client.name" required>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill" [style.width.%]=100>
             <mat-label>Sobrenome</mat-label>
-            <input matInput name="sobrenome" [(ngModel)]="cliente.sobrenome" required>
+            <input matInput name="lastName" [(ngModel)]="client.lastName" required>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill" [style.width.%]=100>
             <mat-label>CPF</mat-label>
-            <input matInput name="cpf" [(ngModel)]="cliente.cpf" required>
+            <input matInput name="cpf" [(ngModel)]="client.cpf" required>
         </mat-form-field>
     </div>
     <div mat-dialog-actions>

@@ -37,6 +37,8 @@ import { EditarClienteComponent } from './clientes/editar-cliente/editar-cliente
 import { ExcluirClienteComponent } from './clientes/excluir-cliente/excluir-cliente.component';
 import { ListarClienteComponent } from './clientes/listar-cliente/listar-cliente.component';
 import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { HomeComponent } from './home/home.component';
     CurrencyMaskModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [
     ProductRepositoryService
