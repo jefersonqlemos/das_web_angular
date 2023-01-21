@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
 import { IPedido } from 'src/app/services/interfaces/IPedido';
-import { IProductModel } from 'src/app/services/interfaces/IProduct';
+import { IProduct } from 'src/app/services/interfaces/IProduct';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
 import { IProdutoPedido } from 'src/app/services/interfaces/IProdutoPedido';
 import { CarrinhoRepositoryService } from 'src/app/services/repositories/carrinhos/carrinho-repository.service';

@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IClienteModel } from 'src/app/services/interfaces/ICliente';
 import { ClientRepositoryService } from 'src/app/services/repositories/client/client-repository.service';
-import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
 
 @Component({
   selector: 'app-excluir-cliente',

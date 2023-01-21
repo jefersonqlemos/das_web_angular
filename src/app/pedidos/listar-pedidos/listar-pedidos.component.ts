@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IPedido } from 'src/app/services/interfaces/IPedido';
-import { IProductModel } from 'src/app/services/interfaces/IProduct';
+import { IProduct } from 'src/app/services/interfaces/IProduct';
 import { IProdutoPedido } from 'src/app/services/interfaces/IProdutoPedido';
 import { PedidoRepositoryService } from 'src/app/services/repositories/pedidos/pedido-repository.service';
 import { DialogVisualizarProdutosPedidosComponent } from '../dialog-visualizar-produtos-pedidos/dialog-visualizar-produtos-pedidos.component';

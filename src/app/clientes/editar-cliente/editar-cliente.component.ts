@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { IClient } from 'src/app/services/interfaces/IClient';
 import { IClienteModel } from 'src/app/services/interfaces/ICliente';
 import { ClientRepositoryService } from 'src/app/services/repositories/client/client-repository.service';
-import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
 
 @Component({
   selector: 'app-editar-cliente',

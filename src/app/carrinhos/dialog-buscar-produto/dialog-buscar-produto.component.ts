@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { map, Observable, startWith } from 'rxjs';
-import { IProductModel } from 'src/app/services/interfaces/IProduct';
+import { IProduct } from 'src/app/services/interfaces/IProduct';
 import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
 
 @Component({
@@ -13,15 +13,15 @@ import { ProductRepositoryService } from 'src/app/services/repositories/products
 export class DialogBuscarProdutoComponent implements OnInit {
 
   myControl = new FormControl('');
-  filteredProdutos?: Observable<IProductModel[]>;
+  filteredProdutos?: Observable<IProduct[]>;
 
   constructor(
     public dialogRef: MatDialogRef<DialogBuscarProdutoComponent>,
-    @Inject(MAT_DIALOG_DATA) public produto: IProductModel,
-    public repositoryService: ProductRepositoryService
+    @Inject(MAT_DIALOG_DATA) public produto: IProduct,
+    public productRepositoryService: ProductRepositoryService
   ) { }
 
-  produtos: IProductModel[] = this.repositoryService.getAll();
+  produtos: IProduct[] = [];//[this.productRepositoryService.getAll()];
 
   ngOnInit(): void {
     this.filteredProdutos = this.myControl.valueChanges.pipe(
@@ -34,7 +34,7 @@ export class DialogBuscarProdutoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private _filter(name: string): IProductModel[] {
+  private _filter(name: string): IProduct[] {
     const filterValue = name.toLowerCase();
 
     return this.produtos.filter(produto => produto.name.toLowerCase().includes(filterValue));

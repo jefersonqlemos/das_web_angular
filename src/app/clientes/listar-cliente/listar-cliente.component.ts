@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { IClient } from 'src/app/services/interfaces/IClient';
 import { IClienteModel } from 'src/app/services/interfaces/ICliente';
 import { ClientRepositoryService } from 'src/app/services/repositories/client/client-repository.service';
-import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
 import { EditarClienteComponent } from '../editar-cliente/editar-cliente.component';
 import { ExcluirClienteComponent } from '../excluir-cliente/excluir-cliente.component';
 import { InserirClienteComponent } from '../inserir-cliente/inserir-cliente.component';
