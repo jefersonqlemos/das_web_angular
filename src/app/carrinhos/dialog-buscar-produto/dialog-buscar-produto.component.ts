@@ -21,7 +21,7 @@ export class DialogBuscarProdutoComponent implements OnInit {
     public productRepositoryService: ProductRepositoryService
   ) { }
 
-  produtos: IProduct[] = [];//[this.productRepositoryService.getAll()];
+  products: IProduct[] = [];//[this.productRepositoryService.getAll()];
 
   ngOnInit(): void {
     this.filteredProdutos = this.myControl.valueChanges.pipe(
@@ -35,14 +35,18 @@ export class DialogBuscarProdutoComponent implements OnInit {
   }
 
   private _filter(name: string): IProduct[] {
+    this.productRepositoryService.getAll().subscribe(data => 
+      this.products = JSON.parse(JSON.stringify(data))
+    );
+
     const filterValue = name.toLowerCase();
 
-    return this.produtos.filter(produto => produto.name.toLowerCase().includes(filterValue));
+    return this.products.filter(produto => produto.name.toLowerCase().includes(filterValue));
   }
 
   produtoSelecionado(produto: any, quantidade: any){
     console.log(quantidade);
-    this.dialogRef.close({ produtoId: produto.option.id, produtoNome: produto.option.value, quantidade: quantidade})
+    this.dialogRef.close({ productId: produto.option.id, value: produto.option.value, quantity: quantidade, product: produto})
   }
 
 }

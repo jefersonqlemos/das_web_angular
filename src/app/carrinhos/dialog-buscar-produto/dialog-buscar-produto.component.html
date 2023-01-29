@@ -13,8 +13,8 @@
                  [formControl]="myControl"
                  [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="produtoSelecionado($event, quantidade.value)">
-            <mat-option *ngFor="let produto of filteredProdutos | async" id={{produto.id}} [value]="produto.name">
-              {{produto.id}} - {{produto.name}} - R$ {{ produto.value | number :'1.2-2' }}
+            <mat-option *ngFor="let product of filteredProdutos | async" id={{product.id}} [value]="product.value">
+              {{product.id}} - {{product.name}} - R$ {{ product.value | number :'1.2-2' }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>

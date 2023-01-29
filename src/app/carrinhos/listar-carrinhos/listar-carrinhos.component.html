@@ -20,34 +20,34 @@
                 <br>
             </section>
 
-            <table mat-table [dataSource]="carrinhos" class="mat-elevation-z8">
+            <table mat-table [dataSource]="carts" class="mat-elevation-z8">
                 <!--- Note that these columns can be defined in any order.
                     The actual rendered columns are set as a property on the row definition" -->
 
                 <!-- Position Column -->
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef> ID </th>
-                    <td mat-cell *matCellDef="let carrinho"> {{carrinho.id}} </td>
+                    <td mat-cell *matCellDef="let cart"> {{cart.id}} </td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="clienteId">
                     <th mat-header-cell *matHeaderCellDef> Nome Cliente </th>
-                    <td mat-cell *matCellDef="let carrinho"> {{carrinho.cliente.nome}} {{carrinho.cliente.sobrenome}} </td>
+                    <td mat-cell *matCellDef="let cart"> {{cart.clients.name}} {{cart.clients.lastName}}</td>
                 </ng-container>
 
                 <!-- Weight Column -->
                 <ng-container matColumnDef="valorTotal">
                     <th mat-header-cell *matHeaderCellDef> Valor Total </th>
-                    <td mat-cell *matCellDef="let carrinho">R$ {{carrinho.valorTotal | number :'1.2-2'}} </td>
+                    <td mat-cell *matCellDef="let cart">R$ {{cart.totalValue | number :'1.2-2'}} </td>
                 </ng-container>
 
                 <!-- Editar Column -->
                 <ng-container matColumnDef="visualizarProdutos">
                     <th mat-header-cell *matHeaderCellDef> Visualizar Produtos </th>
-                    <td mat-cell *matCellDef="let carrinho"> 
+                    <td mat-cell *matCellDef="let cart"> 
                         <button mat-icon-button color="primary"
-                            (click)="visualizarProdutos(carrinho)">
+                            (click)="visualizarProdutos(cart)">
                             <mat-icon>view_list</mat-icon>
                         </button> </td>
                 </ng-container>
@@ -55,8 +55,8 @@
                 <!-- Editar Column -->
                 <ng-container matColumnDef="editar">
                     <th mat-header-cell *matHeaderCellDef> Editar </th>
-                    <td mat-cell *matCellDef="let carrinho"> <button mat-icon-button color="primary"
-                            [routerLink]="['/editar-carrinho/', carrinho.id]">
+                    <td mat-cell *matCellDef="let cart"> <button mat-icon-button color="primary"
+                            [routerLink]="['/editar-carrinho/', cart.id]">
                             <mat-icon>edit</mat-icon>
                         </button> </td>
                 </ng-container>

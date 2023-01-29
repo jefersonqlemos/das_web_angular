@@ -8,6 +8,10 @@ import { RequestsService } from '../../requests/requests.service';
 export class ProductRepositoryService{
   constructor(public requestsService: RequestsService) {}
 
+  get(id: any) {
+    return this.requestsService.get('product/'+id)
+  }
+
   getAll() {
     return this.requestsService.get('list-products')
   }

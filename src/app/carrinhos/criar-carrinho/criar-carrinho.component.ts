@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
+import { ICartProduct } from 'src/app/services/interfaces/ICartProduct';
+import { IClient } from 'src/app/services/interfaces/IClient';
 import { IClienteModel } from 'src/app/services/interfaces/ICliente';
 import { IProduct } from 'src/app/services/interfaces/IProduct';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
@@ -20,7 +22,7 @@ export class CriarCarrinhoComponent implements OnInit {
 
   displayedColumns: string[] = [ 'produtoId', 'quantidade', 'valor', 'remover'];
 
-  produtos: IProdutoCarrinho[] = [];
+  produtos: ICartProduct[] = [];
 
   nome: string = '';
   id: string = '';
@@ -37,18 +39,16 @@ export class CriarCarrinhoComponent implements OnInit {
   ngOnInit(): void { }
 
   adicionarProduto(){
-    let produtos: any = this.repositoryServiceProduct.getAll();
-    this.openDialogProdutos(DialogBuscarProdutoComponent, produtos)
+    this.openDialogProdutos(DialogBuscarProdutoComponent)
   }
 
   adicionarCliente(){
-    //let clientes: any = this.repositoryService.getAll();
-    //this.openDialogClientes(DialogBuscarClienteComponent, clientes)
+    this.openDialogClientes(DialogBuscarClienteComponent)
   }
 
-  removerProduto(produto: IProdutoCarrinho){
-    console.log(produto.produto.id);
-    this.produtos = this.produtos.filter((u) => u.produto.id !== produto.produto.id);
+  removerProduto(produto: ICartProduct){
+    console.log(produto.id);
+    this.produtos = this.produtos.filter((u) => u.id !== produto.id);
   }
 
   salvarCarrinho(){
@@ -81,7 +81,7 @@ export class CriarCarrinhoComponent implements OnInit {
     window.location.href = 'listar-carrinhos';*/
   }
 
-  openDialogClientes(type: any, data?: IClienteModel[]): void {
+  openDialogClientes(type: any, data?: IClient[]): void {
     const dialogRef = this.dialog.open(type, {
       width: this.DIALOG_WIDTH,
       data: data 
@@ -101,17 +101,24 @@ export class CriarCarrinhoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      /*const produto = this.repositoryServiceProduct.getItem(result.produtoId);
-      const produtoCarrinho: IProdutoCarrinho = {
-        "id": 0,
-        "produto": produto,
-        "carrinhoId": 0,
-        "quantidade": result.quantidade
-      };
-      console.log(produto);
-      //this.produtos.push(produtoCarrinho);
-      this.produtos = [...this.produtos, produtoCarrinho];*/
+      this.repositoryServiceProduct.get(result.productId).subscribe( data =>
+        this.addTableCartProduct(JSON.parse(JSON.stringify(data)), result)
+      );
+      //this.repositoryServiceProduct.getItem(result.produtoId);
     });
+  }
+
+  addTableCartProduct(product: any, result: any){
+    console.log(product);
+      const cartProduct: ICartProduct = {
+        "id": 0,
+        "productId": result.productId,
+        "cartId": 0,
+        "quantity": result.quantity,
+        "value": result.value,
+        "product": product,
+      };
+      this.produtos = [...this.produtos, cartProduct];
   }
 
 }
