@@ -1,11 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
+import { ICart } from 'src/app/services/interfaces/ICart';
 import { IPedido } from 'src/app/services/interfaces/IPedido';
 import { IProduct } from 'src/app/services/interfaces/IProduct';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
 import { IProdutoPedido } from 'src/app/services/interfaces/IProdutoPedido';
 import { CarrinhoRepositoryService } from 'src/app/services/repositories/carrinhos/carrinho-repository.service';
+import { OrderRepositoryService } from 'src/app/services/repositories/order/order-repository.service';
 import { PedidoRepositoryService } from 'src/app/services/repositories/pedidos/pedido-repository.service';
 import { ProdutosCarrinhoByCarrinhoidService } from 'src/app/services/repositories/produtos-carrinho-by-carrinhoid/produtos-carrinho-by-carrinhoid.service';
 import { DialogExcluirCarrinhoComponent } from '../dialog-excluir-carrinho/dialog-excluir-carrinho.component';
@@ -19,10 +22,10 @@ export class DialogTransformarPedidoComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogExcluirCarrinhoComponent>,
-    @Inject(MAT_DIALOG_DATA) public carrinho: ICarrinho,
-    public pedidoRepositoryService: PedidoRepositoryService,
-    public produtosCarrinhoByCarrinhoIdRepositoryService: ProdutosCarrinhoByCarrinhoidService,
-    public carrinhoRepositoryService: CarrinhoRepositoryService 
+    @Inject(MAT_DIALOG_DATA) public carrinho: ICart,
+    public orderRepositoryService: OrderRepositoryService,
+    private _snackBar: MatSnackBar,
+
   ) { }
 
   ngOnInit(): void {
@@ -32,9 +35,17 @@ export class DialogTransformarPedidoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  finalizar(carrinho: ICarrinho): void {
+  finalizar(cart: ICart): void {
 
-    const produtosCarrinho = this.produtosCarrinhoByCarrinhoIdRepositoryService.getArrayItem(carrinho.id);
+    //console.log(cart);
+
+    this.orderRepositoryService.store(cart.id).subscribe(data=>
+      this.response(data)
+    );
+
+    window.location.reload();
+
+    /*const produtosCarrinho = this.produtosCarrinhoByCarrinhoIdRepositoryService.getArrayItem(carrinho.id);
 
     var produtos: IProdutoPedido[] = [];
 
@@ -57,9 +68,17 @@ export class DialogTransformarPedidoComponent implements OnInit {
 
     this.pedidoRepositoryService.add(pedido);
 
-    this.carrinhoRepositoryService.remove(carrinho.id);
+    this.carrinhoRepositoryService.remove(carrinho.id);*/
 
-    window.location.reload();
+  }
+
+  async response(data: any): Promise<void>{
+    if(data=="OK"){
+      this._snackBar.open("Pedido criado com sucesso", "sair", { duration: 3000 });
+      this.dialogRef.close();
+    }else{
+      this._snackBar.open("algo deu errado", "sair", { duration: 3000 });
+    }
   }
 
 }

@@ -3,10 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
 import { ICartProduct } from 'src/app/services/interfaces/ICartProduct';
 import { IClient } from 'src/app/services/interfaces/IClient';
+import { ICart } from 'src/app/services/interfaces/ICart';
 import { IClienteModel } from 'src/app/services/interfaces/ICliente';
 import { IProduct } from 'src/app/services/interfaces/IProduct';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
 import { CarrinhoRepositoryService } from 'src/app/services/repositories/carrinhos/carrinho-repository.service';
+import { CartProductRepositoryService } from 'src/app/services/repositories/cart-product/cart-product-repository.service';
+import { CartRepositoryService } from 'src/app/services/repositories/cart/cart-repository.service';
 import { ClientRepositoryService } from 'src/app/services/repositories/client/client-repository.service';
 import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
 import { ProdutosCarrinhoRepositoryService } from 'src/app/services/repositories/produtos-carrinho/produtos-carrinho-repository.service';
@@ -27,10 +30,16 @@ export class CriarCarrinhoComponent implements OnInit {
   nome: string = '';
   id: string = '';
 
+  public cart: ICart = {
+    id: 0,
+    clientId: 0,
+    totalValue: 0
+  };
+
   constructor(public clientRepositoryService: ClientRepositoryService,
     public repositoryServiceProduct: ProductRepositoryService,
-    public repositoryServiceCarrinho: CarrinhoRepositoryService,
-    public repositoryServiceProdutoCarrinho: ProdutosCarrinhoRepositoryService,
+    public cartRepositoryService: CartRepositoryService,
+    public cartProductRepositoryService: CartProductRepositoryService,
     public dialog: MatDialog) { 
     }
 
@@ -52,33 +61,37 @@ export class CriarCarrinhoComponent implements OnInit {
   }
 
   salvarCarrinho(){
-    /*var id = (<HTMLInputElement>document.getElementById('nome')).name;
-    let cliente = this.repositoryService.getItem(id);
+
+    this.cart.clientId = parseInt(this.id);
 
     var valorTotal = 0;
     this.produtos.forEach(function (value) {
-        valorTotal = valorTotal + value.produto.value*value.quantidade;
+        valorTotal = valorTotal + value.product.value*value.quantity;
     });
 
-    const carrinho: ICarrinho = {
+    this.cart.totalValue = valorTotal;
+
+    /*const carrinho: ICarrinho = {
         "id": 0,
         "cliente": cliente, 
         "valorTotal": valorTotal
-    }; 
+    };*/ 
     
-    this.repositoryServiceCarrinho.add(carrinho)
-    var carrinhos: ICarrinho[] = this.repositoryServiceCarrinho.getAll();
+    this.cartRepositoryService.store(this.cart).subscribe((data)=>
+      this.cart = JSON.parse(JSON.stringify(data))
+    );
+    //var carrinhos: ICarrinho[] = this.repositoryServiceCarrinho.getAll();
 
-    var idcarrinho = carrinhos[carrinhos.length-1].id;
+    //var idcarrinho = carrinhos[carrinhos.length-1].id;
 
     this.produtos.forEach((value) => {
-        value.carrinhoId = idcarrinho;
-        this.repositoryServiceProdutoCarrinho.add(value);
+        value.cartId = this.cart.id;
+        this.cartProductRepositoryService.store(value);
     });
 
     console.log(this.produtos);
 
-    window.location.href = 'listar-carrinhos';*/
+    window.location.href = 'listar-carrinhos';
   }
 
   openDialogClientes(type: any, data?: IClient[]): void {

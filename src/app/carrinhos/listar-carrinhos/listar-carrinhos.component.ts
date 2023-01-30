@@ -32,7 +32,7 @@ export class ListarCarrinhosComponent implements OnInit {
 
   private DIALOG_WIDTH = "50%"
 
-  openDialog(type: any, data?: ICarrinho): void {
+  openDialog(type: any, data?: ICart): void {
     const dialogRef = this.dialog.open(type, {
       width: this.DIALOG_WIDTH,
       data: data
@@ -54,16 +54,16 @@ export class ListarCarrinhosComponent implements OnInit {
     });
   }
 
-  visualizarProdutos(carrinho: ICarrinho): void {
+  visualizarProdutos(carrinho: ICart): void {
     let produtos: any = this.repositoryServiceProdutosCarrinhosByIdCarrinho.getArrayItem(carrinho.id);
     this.openDialogProdutos(DialogVisualizarProdutosComponent, produtos);
   }
 
-  excluirCarrinho(carrinho: ICarrinho): void {
+  excluirCarrinho(carrinho: ICart): void {
     this.openDialog(DialogExcluirCarrinhoComponent, carrinho);
   }
 
-  transformarPedido(carrinho: ICarrinho): void {
+  transformarPedido(carrinho: ICart): void {
     this.openDialog(DialogTransformarPedidoComponent, carrinho);
   }
 
