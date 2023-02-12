@@ -60,7 +60,7 @@ export class CriarCarrinhoComponent implements OnInit {
     this.produtos = this.produtos.filter((u) => u.id !== produto.id);
   }
 
-  salvarCarrinho(){
+  async salvarCarrinho(){
 
     this.cart.clientId = parseInt(this.id);
 
@@ -77,16 +77,13 @@ export class CriarCarrinhoComponent implements OnInit {
         "valorTotal": valorTotal
     };*/ 
     
-    this.cartRepositoryService.store(this.cart).subscribe((data)=>
-      this.cart = JSON.parse(JSON.stringify(data))
+    await this.cartRepositoryService.store(this.cart).subscribe((data)=>
+      (this.cart = JSON.parse(JSON.stringify(data)))
     );
-    //var carrinhos: ICarrinho[] = this.repositoryServiceCarrinho.getAll();
-
-    //var idcarrinho = carrinhos[carrinhos.length-1].id;
-
+  
     this.produtos.forEach((value) => {
-        value.cartId = this.cart.id;
-        this.cartProductRepositoryService.store(value);
+      value.cartId = this.cart.id;
+      this.cartProductRepositoryService.store(value);
     });
 
     console.log(this.produtos);
