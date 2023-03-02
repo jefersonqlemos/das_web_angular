@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IProductModel } from 'src/app/services/interfaces/IProduct';
+import { IProduct } from 'src/app/services/interfaces/IProduct';
 import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
 import { DialogCadastrarProdutoComponent } from '../dialog-cadastrar-produto/dialog-cadastrar-produto.component';
 import { DialogEditarProdutoComponent } from '../dialog-editar-produto/dialog-editar-produto.component';
@@ -16,37 +16,45 @@ export class ListarProdutosComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public repositoryService: ProductRepositoryService
+    public productRepositoryService: ProductRepositoryService,
+    private changeDetectorRefs: ChangeDetectorRef
   ) {}
 
-  LISTA_PRODUTOS: IProductModel[] = this.repositoryService.getAll();
-
-  produtos = this.LISTA_PRODUTOS;
+  products: IProduct[] = [];
 
   private DIALOG_WIDTH = "50%"
 
-  openDialog(type: any, data?: IProductModel): void {
+  openDialog(type: any, data?: IProduct): void {
     const dialogRef = this.dialog.open(type, {
       width: this.DIALOG_WIDTH,
       data: data,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      this.getAll();
       console.log('The dialog was closed');
     });
   }
 
-  cadastrarProduto(): void {
+  createProduct(): void {
     this.openDialog(DialogCadastrarProdutoComponent);
   }
 
-  editarProduto(produto: IProductModel): void {
-    this.openDialog(DialogEditarProdutoComponent, produto);
+  editProduct(product: IProduct): void {
+    this.openDialog(DialogEditarProdutoComponent, product);
   }
 
-  excluirProduto(produto: IProductModel): void {
-    this.openDialog(DialogExcluirProdutoComponent, produto);
+  deleteProduct(product: IProduct): void {
+    this.openDialog(DialogExcluirProdutoComponent, product);
   }
 
-  ngOnInit(): void {}
+  getAll(){
+    this.productRepositoryService.getAll().subscribe(data => 
+      (this.products = JSON.parse(JSON.stringify(data))) 
+      (this.changeDetectorRefs.detectChanges()));
+  }
+
+  ngOnInit(): void {
+    this.getAll();
+  }
 }

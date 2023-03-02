@@ -3,8 +3,9 @@ import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { IClient } from 'src/app/services/interfaces/IClient';
 import { IClienteModel } from 'src/app/services/interfaces/ICliente';
-import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
+import { ClientRepositoryService } from 'src/app/services/repositories/client/client-repository.service';
 
 @Component({
   selector: 'app-dialog-buscar-cliente',
@@ -14,17 +15,20 @@ import { ClienteRepositoryService } from 'src/app/services/repositories/clientes
 export class DialogBuscarClienteComponent implements OnInit {
 
   myControl = new FormControl('');
-  filteredClientes?: Observable<IClienteModel[]>;
+  filteredClientes?: Observable<IClient[]>;
 
   constructor(
     public dialogRef: MatDialogRef<DialogBuscarClienteComponent>,
-    @Inject(MAT_DIALOG_DATA) public cliente: IClienteModel,
-    public repositoryService: ClienteRepositoryService
+    @Inject(MAT_DIALOG_DATA) public cliente: IClient,
+    public clientRepositoryService: ClientRepositoryService
   ) { }
 
-  clientes: IClienteModel[] = this.repositoryService.getAll();
+  clients: IClient[] = [];
 
   ngOnInit(): void {
+    this.clientRepositoryService.getAll().subscribe(data => 
+      this.clients = JSON.parse(JSON.stringify(data))
+    );
     this.filteredClientes = this.myControl.valueChanges.pipe(
       startWith(''),
       map(nome => this._filter(nome || ''))
@@ -35,15 +39,14 @@ export class DialogBuscarClienteComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private _filter(nome: string): IClienteModel[] {
+  private _filter(nome: string){//: IClient[] {
     const filterValue = nome.toLowerCase();
-
-    return this.clientes.filter(cliente => cliente.nome.toLowerCase().includes(filterValue));
+    return this.clients.filter(client => client.name.toLowerCase().includes(filterValue));
   }
 
-  clienteSelecionado(cliente: any){
-    console.log(cliente.option);
-    this.dialogRef.close({ clienteId: cliente.option.id, clienteNome: cliente.option.value })
+  clienteSelecionado(client: any){
+    console.log(client.option);
+    this.dialogRef.close({ clienteId: client.option.id, clienteNome: client.option.value })
   }
 
 }

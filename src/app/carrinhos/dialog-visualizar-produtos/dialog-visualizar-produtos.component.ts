@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ICartProduct } from 'src/app/services/interfaces/ICartProduct';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
 import { CarrinhoRepositoryService } from 'src/app/services/repositories/carrinhos/carrinho-repository.service';
 
@@ -14,7 +15,7 @@ export class DialogVisualizarProdutosComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogVisualizarProdutosComponent>,
-    @Inject(MAT_DIALOG_DATA) public produtos: IProdutoCarrinho[],
+    @Inject(MAT_DIALOG_DATA) public produtos: ICartProduct[],
     public repositoryService: CarrinhoRepositoryService
     ) { }
 

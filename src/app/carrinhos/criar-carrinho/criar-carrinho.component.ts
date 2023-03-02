@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
+import { ICartProduct } from 'src/app/services/interfaces/ICartProduct';
+import { IClient } from 'src/app/services/interfaces/IClient';
+import { ICart } from 'src/app/services/interfaces/ICart';
 import { IClienteModel } from 'src/app/services/interfaces/ICliente';
-import { IProductModel } from 'src/app/services/interfaces/IProduct';
+import { IProduct } from 'src/app/services/interfaces/IProduct';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
 import { CarrinhoRepositoryService } from 'src/app/services/repositories/carrinhos/carrinho-repository.service';
-import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
+import { CartProductRepositoryService } from 'src/app/services/repositories/cart-product/cart-product-repository.service';
+import { CartRepositoryService } from 'src/app/services/repositories/cart/cart-repository.service';
+import { ClientRepositoryService } from 'src/app/services/repositories/client/client-repository.service';
 import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
 import { ProdutosCarrinhoRepositoryService } from 'src/app/services/repositories/produtos-carrinho/produtos-carrinho-repository.service';
 import { DialogBuscarClienteComponent } from '../dialog-buscar-cliente/dialog-buscar-cliente.component';
@@ -20,15 +25,21 @@ export class CriarCarrinhoComponent implements OnInit {
 
   displayedColumns: string[] = [ 'produtoId', 'quantidade', 'valor', 'remover'];
 
-  produtos: IProdutoCarrinho[] = [];
+  produtos: ICartProduct[] = [];
 
   nome: string = '';
   id: string = '';
 
-  constructor(public repositoryService: ClienteRepositoryService,
+  public cart: ICart = {
+    id: 0,
+    clientId: 0,
+    totalValue: 0
+  };
+
+  constructor(public clientRepositoryService: ClientRepositoryService,
     public repositoryServiceProduct: ProductRepositoryService,
-    public repositoryServiceCarrinho: CarrinhoRepositoryService,
-    public repositoryServiceProdutoCarrinho: ProdutosCarrinhoRepositoryService,
+    public cartRepositoryService: CartRepositoryService,
+    public cartProductRepositoryService: CartProductRepositoryService,
     public dialog: MatDialog) { 
     }
 
@@ -37,43 +48,42 @@ export class CriarCarrinhoComponent implements OnInit {
   ngOnInit(): void { }
 
   adicionarProduto(){
-    let produtos: any = this.repositoryServiceProduct.getAll();
-    this.openDialogProdutos(DialogBuscarProdutoComponent, produtos)
+    this.openDialogProdutos(DialogBuscarProdutoComponent)
   }
 
   adicionarCliente(){
-    let clientes: any = this.repositoryService.getAll();
-    this.openDialogClientes(DialogBuscarClienteComponent, clientes)
+    this.openDialogClientes(DialogBuscarClienteComponent)
   }
 
-  removerProduto(produto: IProdutoCarrinho){
-    console.log(produto.produto.id);
-    this.produtos = this.produtos.filter((u) => u.produto.id !== produto.produto.id);
+  removerProduto(produto: ICartProduct){
+    console.log(produto.id);
+    this.produtos = this.produtos.filter((u) => u.id !== produto.id);
   }
 
-  salvarCarrinho(){
-    var id = (<HTMLInputElement>document.getElementById('nome')).name;
-    let cliente = this.repositoryService.getItem(id);
+  async salvarCarrinho(){
+
+    this.cart.clientId = parseInt(this.id);
 
     var valorTotal = 0;
     this.produtos.forEach(function (value) {
-        valorTotal = valorTotal + value.produto.value*value.quantidade;
+        valorTotal = valorTotal + value.product.value*value.quantity;
     });
 
-    const carrinho: ICarrinho = {
+    this.cart.totalValue = valorTotal;
+
+    /*const carrinho: ICarrinho = {
         "id": 0,
         "cliente": cliente, 
         "valorTotal": valorTotal
-    }; 
+    };*/ 
     
-    this.repositoryServiceCarrinho.add(carrinho)
-    var carrinhos: ICarrinho[] = this.repositoryServiceCarrinho.getAll();
-
-    var idcarrinho = carrinhos[carrinhos.length-1].id;
-
+    await this.cartRepositoryService.store(this.cart).subscribe((data)=>
+      (this.cart = JSON.parse(JSON.stringify(data)))
+    );
+  
     this.produtos.forEach((value) => {
-        value.carrinhoId = idcarrinho;
-        this.repositoryServiceProdutoCarrinho.add(value);
+      value.cartId = this.cart.id;
+      this.cartProductRepositoryService.store(value);
     });
 
     console.log(this.produtos);
@@ -81,7 +91,7 @@ export class CriarCarrinhoComponent implements OnInit {
     window.location.href = 'listar-carrinhos';
   }
 
-  openDialogClientes(type: any, data?: IClienteModel[]): void {
+  openDialogClientes(type: any, data?: IClient[]): void {
     const dialogRef = this.dialog.open(type, {
       width: this.DIALOG_WIDTH,
       data: data 
@@ -94,24 +104,31 @@ export class CriarCarrinhoComponent implements OnInit {
     });
   }
 
-  openDialogProdutos(type: any, data?: IProductModel[]): void {
+  openDialogProdutos(type: any, data?: IProduct[]): void {
     const dialogRef = this.dialog.open(type, {
       width: this.DIALOG_WIDTH,
       data: data 
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      const produto = this.repositoryServiceProduct.getItem(result.produtoId);
-      const produtoCarrinho: IProdutoCarrinho = {
-        "id": 0,
-        "produto": produto,
-        "carrinhoId": 0,
-        "quantidade": result.quantidade
-      };
-      console.log(produto);
-      //this.produtos.push(produtoCarrinho);
-      this.produtos = [...this.produtos, produtoCarrinho];
+      this.repositoryServiceProduct.get(result.productId).subscribe( data =>
+        this.addTableCartProduct(JSON.parse(JSON.stringify(data)), result)
+      );
+      //this.repositoryServiceProduct.getItem(result.produtoId);
     });
+  }
+
+  addTableCartProduct(product: any, result: any){
+    console.log(product);
+      const cartProduct: ICartProduct = {
+        "id": 0,
+        "productId": result.productId,
+        "cartId": 0,
+        "quantity": result.quantity,
+        "value": result.value,
+        "product": product,
+      };
+      this.produtos = [...this.produtos, cartProduct];
   }
 
 }

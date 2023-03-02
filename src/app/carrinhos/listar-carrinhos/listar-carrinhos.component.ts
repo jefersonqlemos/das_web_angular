@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
@@ -8,6 +8,8 @@ import { ProdutosCarrinhoRepositoryService } from 'src/app/services/repositories
 import { DialogExcluirCarrinhoComponent } from '../dialog-excluir-carrinho/dialog-excluir-carrinho.component';
 import { ProdutosCarrinhoByCarrinhoidService } from 'src/app/services/repositories/produtos-carrinho-by-carrinhoid/produtos-carrinho-by-carrinhoid.service';
 import { DialogTransformarPedidoComponent } from '../dialog-transformar-pedido/dialog-transformar-pedido.component';
+import { ICart } from 'src/app/services/interfaces/ICart';
+import { CartRepositoryService } from 'src/app/services/repositories/cart/cart-repository.service';
 
 @Component({
   selector: 'app-listar-carrinhos',
@@ -20,18 +22,17 @@ export class ListarCarrinhosComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public repositoryService: CarrinhoRepositoryService,
+    public cartRepositoryService: CartRepositoryService,
     public repositoryServiceProdutos: ProdutosCarrinhoRepositoryService,
-    public repositoryServiceProdutosCarrinhosByIdCarrinho: ProdutosCarrinhoByCarrinhoidService  
+    public repositoryServiceProdutosCarrinhosByIdCarrinho: ProdutosCarrinhoByCarrinhoidService,
+    public changeDetectorRefs: ChangeDetectorRef
     ) { }
 
-  LISTA_CARRINHOS: ICarrinho[] = this.repositoryService.getAll();
-
-  carrinhos = this.LISTA_CARRINHOS;
+  carts: ICart[] = [];
 
   private DIALOG_WIDTH = "50%"
 
-  openDialog(type: any, data?: ICarrinho): void {
+  openDialog(type: any, data?: ICart): void {
     const dialogRef = this.dialog.open(type, {
       width: this.DIALOG_WIDTH,
       data: data
@@ -53,20 +54,27 @@ export class ListarCarrinhosComponent implements OnInit {
     });
   }
 
-  visualizarProdutos(carrinho: ICarrinho): void {
+  visualizarProdutos(carrinho: ICart): void {
     let produtos: any = this.repositoryServiceProdutosCarrinhosByIdCarrinho.getArrayItem(carrinho.id);
     this.openDialogProdutos(DialogVisualizarProdutosComponent, produtos);
   }
 
-  excluirCarrinho(carrinho: ICarrinho): void {
+  excluirCarrinho(carrinho: ICart): void {
     this.openDialog(DialogExcluirCarrinhoComponent, carrinho);
   }
 
-  transformarPedido(carrinho: ICarrinho): void {
+  transformarPedido(carrinho: ICart): void {
     this.openDialog(DialogTransformarPedidoComponent, carrinho);
   }
 
+  getAll(){
+    this.cartRepositoryService.getAll().subscribe(data => 
+      (this.carts = JSON.parse(JSON.stringify(data))) 
+      (this.changeDetectorRefs.detectChanges()));
+  }
+
   ngOnInit(): void {
+    this.getAll();
   }
 
 }

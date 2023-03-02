@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Cadastrar Cliente</h1>
-<form #formCliente="ngForm" (ngSubmit)="armazenarCliente(formCliente.value)">
+<form #formCliente="ngForm" (ngSubmit)="storeClient(formCliente.value)">
   <div mat-dialog-content>
       <!-- <mat-form-field appearance="fill" [style.width.%]=100>
         <mat-label>ID</mat-label>
@@ -13,7 +13,7 @@
       <br>
       <mat-form-field appearance="fill" [style.width.%]=50>
         <mat-label>Sobrenome</mat-label>
-        <input matInput name="sobrenome" required ngModel>
+        <input matInput name="lastName" required ngModel>
       </mat-form-field>
       <br>
       <mat-form-field appearance="fill" [style.width.%]=100>

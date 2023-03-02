@@ -3,15 +3,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ICarrinho } from 'src/app/services/interfaces/ICarrinho';
 import { IClienteModel } from 'src/app/services/interfaces/ICliente';
-import { IProductModel } from 'src/app/services/interfaces/IProduct';
+import { IProduct } from 'src/app/services/interfaces/IProduct';
 import { IProdutoCarrinho } from 'src/app/services/interfaces/IProdutoCarrinho';
 import { CarrinhoRepositoryService } from 'src/app/services/repositories/carrinhos/carrinho-repository.service';
-import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
 import { ProductRepositoryService } from 'src/app/services/repositories/products/product-repository.service';
 import { ProdutosCarrinhoRepositoryService } from 'src/app/services/repositories/produtos-carrinho/produtos-carrinho-repository.service';
 import { DialogBuscarClienteComponent } from '../dialog-buscar-cliente/dialog-buscar-cliente.component';
 import { DialogBuscarProdutoComponent } from '../dialog-buscar-produto/dialog-buscar-produto.component';
 import { ProdutosCarrinhoByCarrinhoidService } from 'src/app/services/repositories/produtos-carrinho-by-carrinhoid/produtos-carrinho-by-carrinhoid.service';
+import { ClientRepositoryService } from 'src/app/services/repositories/client/client-repository.service';
 
 @Component({
   selector: 'app-editar-carrinho',
@@ -40,7 +40,7 @@ export class EditarCarrinhoComponent implements OnInit {
   id: number = 0;
 
   constructor(
-    public repositoryService: ClienteRepositoryService,
+    public clientRepositoryService: ClientRepositoryService,
     public repositoryServiceProduct: ProductRepositoryService,
     public repositoryServiceCarrinho: CarrinhoRepositoryService,
     public repositoryServiceProdutoCarrinho: ProdutosCarrinhoRepositoryService,
@@ -66,8 +66,8 @@ export class EditarCarrinhoComponent implements OnInit {
   }
 
   adicionarCliente(){
-    let clientes: any = this.repositoryService.getAll();
-    this.openDialogClientes(DialogBuscarClienteComponent, clientes)
+    //let clientes: any = this.repositoryService.getAll();
+    //this.openDialogClientes(DialogBuscarClienteComponent, clientes)
   }
 
   removerProduto(produto: IProdutoCarrinho){
@@ -76,7 +76,7 @@ export class EditarCarrinhoComponent implements OnInit {
   }
 
   salvarCarrinho(){
-    var id = (<HTMLInputElement>document.getElementById('nome')).name;
+   /* var id = (<HTMLInputElement>document.getElementById('nome')).name;
     let cliente = this.repositoryService.getItem(id);
 
     var valorTotal = 0;
@@ -100,7 +100,7 @@ export class EditarCarrinhoComponent implements OnInit {
 
     console.log(this.produtos);
 
-    window.location.href = 'listar-carrinhos';
+    window.location.href = 'listar-carrinhos';*/
   }
 
   openDialogClientes(type: any, data?: IClienteModel[]): void {
@@ -116,14 +116,14 @@ export class EditarCarrinhoComponent implements OnInit {
     });
   }
 
-  openDialogProdutos(type: any, data?: IProductModel[]): void {
+  openDialogProdutos(type: any, data?: IProduct[]): void {
     const dialogRef = this.dialog.open(type, {
       width: this.DIALOG_WIDTH,
       data: data 
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      const produto = this.repositoryServiceProduct.getItem(result.produtoId);
+      /*const produto = this.repositoryServiceProduct.getItem(result.produtoId);
       const produtoCarrinho: IProdutoCarrinho = {
         "id": 0,
         "produto": produto,
@@ -132,7 +132,7 @@ export class EditarCarrinhoComponent implements OnInit {
       };
       console.log(produto);
       //this.produtos.push(produtoCarrinho);
-      this.produtos = [...this.produtos, produtoCarrinho];
+      this.produtos = [...this.produtos, produtoCarrinho];*/
     });
   }
 

@@ -1,7 +1,7 @@
-import { IProductModel } from "./IProduct";
+import { IProduct } from "./IProduct";
 
 export interface IProdutoPedido{
     id: number;
     quantidade: number;
-    produto: IProductModel;
+    produto: IProduct;
 }

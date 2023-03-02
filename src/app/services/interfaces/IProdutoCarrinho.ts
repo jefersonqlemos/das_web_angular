@@ -1,8 +1,8 @@
-import { IProductModel } from "./IProduct";
+import { IProduct } from "./IProduct";
 
 export interface IProdutoCarrinho{
     id: number;
     quantidade: number;
     carrinhoId: number;
-    produto: IProductModel;
+    produto: IProduct;
 }

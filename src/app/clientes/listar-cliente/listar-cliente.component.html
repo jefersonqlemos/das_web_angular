@@ -21,33 +21,33 @@
                 <br>
             </section>
 
-            <table mat-table [dataSource]="clientes" class="mat-elevation-z8">
+            <table mat-table [dataSource]="clients" class="mat-elevation-z8">
                 <!--- Note that these columns can be defined in any order.
                     The actual rendered columns are set as a property on the row definition" -->
 
                 <!-- Position Column -->
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef> ID </th>
-                    <td mat-cell *matCellDef="let cliente"> {{cliente.id}} </td>
+                    <td mat-cell *matCellDef="let client"> {{client.id}} </td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="fullName">
                     <th mat-header-cell *matHeaderCellDef> Nome </th>
-                    <td mat-cell *matCellDef="let cliente"> {{cliente.fullName}} </td>
+                    <td mat-cell *matCellDef="let client"> {{client.name}} {{client.lastName}} </td>
                 </ng-container>
 
-                <!-- Weight Column -->
+                <!-- Weight Column -->1
                 <ng-container matColumnDef="cpf">
                     <th mat-header-cell *matHeaderCellDef> CPF </th>
-                    <td mat-cell *matCellDef="let cliente"> {{cliente.cpf}} </td>
+                    <td mat-cell *matCellDef="let client"> {{client.cpf}} </td>
                 </ng-container>
 
                 <!-- Editar Column -->
                 <ng-container matColumnDef="editar">
                     <th mat-header-cell *matHeaderCellDef> Editar </th>
-                    <td mat-cell *matCellDef="let cliente"> <button mat-icon-button color="primary"
-                            (click)="editarCliente(cliente)">
+                    <td mat-cell *matCellDef="let client"> <button mat-icon-button color="primary"
+                            (click)="editarCliente(client)">
                             <mat-icon>edit</mat-icon>
                         </button> </td>
                 </ng-container>
@@ -55,8 +55,8 @@
                 <!-- Editar Column -->
                 <ng-container matColumnDef="excluir">
                     <th mat-header-cell *matHeaderCellDef> Excluir </th>
-                    <td mat-cell *matCellDef="let cliente"> <button mat-icon-button color="warn"
-                            (click)="excluirCliente(cliente)">
+                    <td mat-cell *matCellDef="let client"> <button mat-icon-button color="warn"
+                            (click)="excluirCliente(client)">
                             <mat-icon>delete</mat-icon>
                         </button> </td>
                 </ng-container>

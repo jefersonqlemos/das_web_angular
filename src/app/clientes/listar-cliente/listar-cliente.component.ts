@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { IClient } from 'src/app/services/interfaces/IClient';
 import { IClienteModel } from 'src/app/services/interfaces/ICliente';
-import { ClienteRepositoryService } from 'src/app/services/repositories/clientes/cliente-repository.service';
+import { ClientRepositoryService } from 'src/app/services/repositories/client/client-repository.service';
 import { EditarClienteComponent } from '../editar-cliente/editar-cliente.component';
 import { ExcluirClienteComponent } from '../excluir-cliente/excluir-cliente.component';
 import { InserirClienteComponent } from '../inserir-cliente/inserir-cliente.component';
@@ -16,12 +17,11 @@ export class ListarClienteComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public repositoryService: ClienteRepositoryService
+    public clientRepositoryService: ClientRepositoryService,
+    private changeDetectorRefs: ChangeDetectorRef
   ) {}
 
-  LISTA: IClienteModel[] = this.repositoryService.getAll();
-
-  clientes = this.LISTA;
+  clients: IClient[] = [];
 
   private DIALOG_WIDTH = "50%"
 
@@ -32,6 +32,7 @@ export class ListarClienteComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => {
+      this.getAll();
       console.log('The dialog was closed');
     });
   }
@@ -48,5 +49,13 @@ export class ListarClienteComponent implements OnInit {
     this.openDialog(ExcluirClienteComponent, cliente);
   }
 
-  ngOnInit(): void {}
+  getAll(){
+    this.clientRepositoryService.getAll().subscribe(data => 
+      (this.clients = JSON.parse(JSON.stringify(data))) 
+      (this.changeDetectorRefs.detectChanges()));
+  }
+
+  ngOnInit(): void {
+    this.getAll();
+  }
 }
