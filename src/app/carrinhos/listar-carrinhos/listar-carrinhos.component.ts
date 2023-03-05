@@ -18,7 +18,7 @@ import { CartRepositoryService } from 'src/app/services/repositories/cart/cart-r
 })
 export class ListarCarrinhosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'clienteId', 'valorTotal', 'visualizarProdutos', 'editar', 'excluir', 'enviarPedido'];
+  displayedColumns: string[] = ['id', 'clienteId', 'valorTotal', 'visualizarProdutos', 'excluir', 'enviarPedido']; //'editar', 
 
   constructor(
     public dialog: MatDialog,
